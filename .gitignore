@@ -1,0 +1,83 @@
+# Visual Studio specific files
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific folders
+My Documents/
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
+
+# Compiled binary files
+bin/
+obj/
+out/
+
+# Web and database cache files
+.cache/
+*.bak
+*.swp
+*~
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+*.old
+*.backup
+*.bak
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# StyleCop
+StyleCopReport.xml
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# Publish output
+publish/
+publish_output/
+
+# Rider files
+.idea/
