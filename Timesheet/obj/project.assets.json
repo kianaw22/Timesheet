@@ -4214,19 +4214,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hosseini.k\\.nuget\\packages\\": {}
+    "C:\\Users\\Asus\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
       "projectName": "Timesheet",
-      "projectPath": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
-      "packagesPath": "C:\\Users\\hosseini.k\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\obj\\",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
+      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\hosseini.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4296,7 +4296,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
