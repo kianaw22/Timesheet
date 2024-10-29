@@ -2,10 +2,12 @@
 
 namespace Timesheet.Models.Entities
 {
-    public class ApplicationUser: IdentityUser
+    public class ApplicationUser : IdentityUser
     {
+
         public string Name { get; set; }
         public string Family { get; set; }
+        public string Password { get; set; }
 
         public byte IsAdmin { get; set; }
     }

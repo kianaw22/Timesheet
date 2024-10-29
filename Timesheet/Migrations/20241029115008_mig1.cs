@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Timesheet.Migrations
 {
     /// <inheritdoc />
@@ -32,6 +34,7 @@ namespace Timesheet.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Family = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsAdmin = table.Column<byte>(type: "tinyint", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -157,6 +160,33 @@ namespace Timesheet.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", null, "Admin", null },
+                    { "2", null, "User", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Family", "IsAdmin", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "admin-user-id", 0, "b4ca62bd-3c1d-4e23-82c5-8dec2ce742a7", null, false, "AdminFamily", (byte)1, false, null, "AdminName", null, null, "Admin@123", "AQAAAAIAAYagAAAAENdXSJIsbtKKCxuAoP3OvrFnx9rMie5GnOeU6lOKa6EWX8bE4i0hfHuCvwjYZe/5nw==", null, false, "ded867d2-31f4-41e0-b7ee-9c033a108c54", false, "admin" },
+                    { "normal-user-id", 0, "729b3371-379d-4c27-8eb3-a63eb29c19bb", null, false, "UserFamily", (byte)0, false, null, "UserName", null, null, "User@123", "AQAAAAIAAYagAAAAEClHN9q3lXDspBSeuYlJvY6doweB6m8/itkZin2Ye1XiB9VrCBTsJkAnKowRXGa+dg==", null, false, "d71ec27f-35b8-4eef-ae26-f0c26a542afc", false, "user" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "1", "admin-user-id" },
+                    { "2", "normal-user-id" }
                 });
 
             migrationBuilder.CreateIndex(

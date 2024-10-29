@@ -293,3 +293,4 @@ C:\Users\Asus\Desktop\Timesheet\Timesheet\obj\Debug\net8.0\scopedcss\projectbund
 C:\Users\Asus\Desktop\Timesheet\Timesheet\obj\Debug\net8.0\Timesheet.csproj.Up2Date
 C:\Users\Asus\Desktop\Timesheet\Timesheet\obj\Debug\net8.0\Timesheet.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Timesheet\Timesheet\obj\Debug\net8.0\ref\Timesheet.dll
+C:\Users\hosseini.k\Desktop\Timesheet\Timesheet\obj\Debug\net8.0\Timesheet.sourcelink.json

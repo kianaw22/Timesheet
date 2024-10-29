@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Area\AdminArea\Controllers\" />
-    <Folder Include="Area\AdminArea\Views\" />
     <Folder Include="Area\UserArea\" />
     <Folder Include="Migrations\" />
   </ItemGroup>

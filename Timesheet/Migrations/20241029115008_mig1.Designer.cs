@@ -12,7 +12,7 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241028112904_mig1")]
+    [Migration("20241029115008_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -110,6 +110,18 @@ namespace Timesheet.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "admin-user-id",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "normal-user-id",
+                            RoleId = "2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -156,6 +168,18 @@ namespace Timesheet.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "User"
+                        });
                 });
 
             modelBuilder.Entity("Timesheet.Models.Entities.ApplicationUser", b =>
@@ -202,6 +226,10 @@ namespace Timesheet.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,6 +260,42 @@ namespace Timesheet.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "admin-user-id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b4ca62bd-3c1d-4e23-82c5-8dec2ce742a7",
+                            EmailConfirmed = false,
+                            Family = "AdminFamily",
+                            IsAdmin = (byte)1,
+                            LockoutEnabled = false,
+                            Name = "AdminName",
+                            Password = "Admin@123",
+                            PasswordHash = "AQAAAAIAAYagAAAAENdXSJIsbtKKCxuAoP3OvrFnx9rMie5GnOeU6lOKa6EWX8bE4i0hfHuCvwjYZe/5nw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ded867d2-31f4-41e0-b7ee-9c033a108c54",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "normal-user-id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "729b3371-379d-4c27-8eb3-a63eb29c19bb",
+                            EmailConfirmed = false,
+                            Family = "UserFamily",
+                            IsAdmin = (byte)0,
+                            LockoutEnabled = false,
+                            Name = "UserName",
+                            Password = "User@123",
+                            PasswordHash = "AQAAAAIAAYagAAAAEClHN9q3lXDspBSeuYlJvY6doweB6m8/itkZin2Ye1XiB9VrCBTsJkAnKowRXGa+dg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d71ec27f-35b8-4eef-ae26-f0c26a542afc",
+                            TwoFactorEnabled = false,
+                            UserName = "user"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
