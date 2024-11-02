@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Timesheet.Area.AdminArea.Controllers
 {
-    [Area("Admin")]
-    [Authorize] // Optional: restrict access to authorized users only
+    [Area("AdminArea")]
+    [Authorize(Roles = "Admin")] // Optional: restrict access to authorized users only
     public class AdminController : Controller
     {
         public IActionResult Index()

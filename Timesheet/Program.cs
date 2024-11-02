@@ -19,6 +19,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
 var app = builder.Build();
@@ -38,18 +39,29 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
+
+app.UseEndpoints(endpoints =>
+{
+  
+
+    endpoints.MapAreaControllerRoute(
+        name: "AdminArea",
+        areaName: "AdminArea",
+        pattern: "AdminArea/{controller=Admin}/{action=Index}/{id?}");
+
+
+    endpoints.MapAreaControllerRoute(
+        name: "UserArea",
+        areaName: "UserArea",
+        pattern: "UserArea/{controller=User}/{action=Index}/{id?}");
+
+
+    endpoints.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
 
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 
-app.MapAreaControllerRoute(
-    name: "Admin",
-    areaName: "Admin",
-    pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
+});
 
 app.Run();

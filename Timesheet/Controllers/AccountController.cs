@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Timesheet.Models.Entities;
 using Timesheet.Models.ViewModels;
@@ -44,10 +45,25 @@ namespace Timesheet.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                
+                if (user != null)
+                {
+                    // Check the user's role
+                    var roles = await _userManager.GetRolesAsync(user);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin", new { area = "AdminArea" }); // Redirect to Admin area
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "User", new { area = "UserArea" }); // Redirect to User area
+                    }
+                }
             }
-
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
             return View(model);
         }
 
@@ -57,6 +73,12 @@ namespace Timesheet.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
