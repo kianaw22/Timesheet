@@ -10,6 +10,7 @@
     <Folder Include="Areas\UserArea\Views\NewFolder\" />
     <Folder Include="Area\AdminArea\Views\NewFolder\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Models\Entities\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

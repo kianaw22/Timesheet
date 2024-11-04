@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Entities;
+using Timesheet.Models.Entities.Admin;
 
 namespace Timesheet.Data
 {
@@ -10,7 +11,7 @@ namespace Timesheet.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
         }
-
+        public DbSet<Position> Posiiton { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
