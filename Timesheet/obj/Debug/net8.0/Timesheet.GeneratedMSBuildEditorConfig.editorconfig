@@ -30,6 +30,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXEFkbWluXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/hosseini.k/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Position/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFBvc2l0aW9uXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/hosseini.k/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
