@@ -84,7 +84,7 @@
                                 click: function (e) {
                                  
                                     var item = this.dataItem($(e.currentTarget).closest("tr"));
-                                    url = "/TimeSheet/Position/DeleteProjectServices";
+                                    url = "/TimeSheet/Position/DeletePosition";
                                     $.ajax({
                                         url: url,
                                         data: { id: item.id },

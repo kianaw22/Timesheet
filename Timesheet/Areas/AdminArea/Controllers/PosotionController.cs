@@ -24,11 +24,11 @@ namespace Timesheet.Areas.AdminArea.Controllers
         }
         public IActionResult AddPosition()
         {
-            ViewData["Users"] = _context.Users
+           ViewBag.user = _context.Users
                  .Select(u => new
                  {
                      u.Id,
-                     u.UserName,
+               
                      FullName = u.Name + " " + u.Family
                  }).ToList();
 
