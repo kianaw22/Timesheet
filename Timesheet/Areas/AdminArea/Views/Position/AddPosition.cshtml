@@ -81,14 +81,6 @@
       
     <script>
    
-        $(document).ready(function () {
-            console.log(ViewBag.user);
-            $('#UserId').change(function () {
-                var selectedText = $(this).find('option:selected').text();
-                var username = selectedText.split(' ')[0]; // Assuming the first part of the FullName is the username
-                $('#UserName').val(username);
-            });
-        });
     </script>
 }
    
