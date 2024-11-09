@@ -5,6 +5,7 @@ using System.Security.Cryptography.Pkcs;
 using Timesheet.Data;
 using Timesheet.Models.Entities;
 using Timesheet.Models.Entities.Admin;
+using Timesheet.Models.ViewModels.Admin;
 
 namespace Timesheet.Areas.AdminArea.Controllers
 {
@@ -28,7 +29,7 @@ namespace Timesheet.Areas.AdminArea.Controllers
                  .Select(u => new
                  {
                      u.Id,
-               
+                     u.UserName,
                      FullName = u.Name + " " + u.Family
                  }).ToList();
 
@@ -36,11 +37,26 @@ namespace Timesheet.Areas.AdminArea.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddPostPosition(Position position)
+        public IActionResult AddPosition(PositionViewModel position)
         {
+            ViewBag.user = _context.Users
+               .Select(u => new
+               {
+                   u.Id,
+                   u.UserName,
+                   FullName = u.Name + " " + u.Family
+               }).ToList();
             if (ModelState.IsValid)
             {
-                _context.Add(position);
+                var positionEntity = new Position
+                {
+                    UserId = position.UserId,
+                    UserName = position.UserName,
+                    PositionType = position.PositionType,
+                    PostionName = position.PostionName,
+                    Formula = position.Formula
+                };
+                _context.Add(positionEntity);
                _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

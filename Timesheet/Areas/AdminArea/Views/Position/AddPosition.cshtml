@@ -14,11 +14,11 @@
             <!-- UserId (Dropdown for selecting user) -->
             <div class="form-group">
                 <label asp-for="UserId" class="control-label col-md-3 col-xs-12"></label>
-                <select asp-for="UserId" class="form-control">
+                <select asp-for="UserId" class="form-control" id="userIdSelect">
                     <option value="">-- انتخاب یوزر --</option>
                     @foreach (var user in ViewBag.user)
                     {
-                        <option value="@user.Id">@user.FullName</option>
+                        <option value="@user.Id" data-username="@user.UserName" >@user.FullName</option>
                     }
                 </select>
             </div>
@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label asp-for="UserName" class="control-label col-md-3 col-xs-12"></label>
                 <div class="col-md-9 col-xs-12">
-                    <input asp-for="UserName" type="text" class="form-control custominput" placeholder="یوزرنیم" readonly />
+                    <input asp-for="UserName" type="text" class="form-control custominput" id="userNameInput" placeholder="یوزرنیم" readonly />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
             </div>
@@ -38,9 +38,9 @@
                 <div class="col-md-9 col-xs-12">
                     <select asp-for="PositionType" class="form-control custominput">
                         <option value="">-- انتخاب نوع سمت --</option>
-                        <option value="Manager">مدیر</option>
-                        <option value="Developer">توسعه‌دهنده</option>
-                        <option value="Analyst">تحلیلگر</option>
+                        <option value="مدیر بخش">مدیر بخش</option>
+                        <option value="مدیر پروژه">مدیر پروژه</option>
+                        <option value="تحلیلگر">تحلیلگر</option>
                         <!-- Add more options as needed -->
                     </select>
                     <span asp-validation-for="PositionType" class="text-danger"></span>
@@ -80,7 +80,13 @@
 @section Scripts {
       
     <script>
-   
+        $(document).ready(function () {
+            $('#userIdSelect').change(function () {
+                var selectedOption = $(this).find('option:selected');
+                var userName = selectedOption.data('username');
+                $('#userNameInput').val(userName);
+            });
+        });
     </script>
 }
    

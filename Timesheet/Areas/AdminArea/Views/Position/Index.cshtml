@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <div class="content">
 
     <nav aria-label="breadcrumb">
@@ -10,117 +11,93 @@
             <li class="breadcrumb-item active" aria-current="page">سمت ها</li>
         </ol>
     </nav>
-    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+    <div class="panel panel-heading" style="background-color:lightsteelblue;box-shadow:3px 1px 1px 0 grey; border-radius:2px;">
         <span style="font-weight:bold;">
-            <i class="glyphicon glyphicon-list"></i>
+          
             لیست سمت ها
         </span>
     </div>
     <div style="margin-bottom:5px;">
-        <a class="btn customGreen1" asp-controller="ProjectServices" asp-action="AddProjectServices">
-            <i class="glyphicon glyphicon-plus"></i>
+        <a class="button" asp-controller="Position" asp-action="AddPosition">
+        
            اضافه کردن سمت
         </a>
     </div>
 
 
     <div>
-        <div id="grid"></div>
+        <div class="k-rtl">
+            <div id="grid"></div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-           var myobj = '@Html.Raw(Json.Serialize(Model))';
-            var jsondata = JSON.parse(myobj);
+            var myobj = '@Html.Raw(Json.Serialize(Model))';
+
+                var jsondata = JSON.parse(myobj);
+                $("#grid").kendoGrid({
+                    dataSource: {
+                        data: jsondata,
+                        pageSize: jsondata.length
+                    },
+                    height: 550,
+                    filterable: true,
+                    groupable: true,
+                    sortable: true,
+                    toolbar: ["pdf", "search", "excel"],
+                    pageable: {
+                        refresh: true,
+                        pageSizes: true,
+                        buttonCount: 5
+                    },
+                    columns: [
+                        { field: "id", width: 150, title: "ID" },
+                        { field: "userName", width: 150, title: "User Name" },
+                        { field: "positionType", width: 150, title: "Position Type" },
+                        { field: "positionName", width: 150, title: "Position Name" },
+                        { field: "formula", width: 150, title: "Formula" },
+                        {
+                            command: [
+                                {
+                                    name: "del",
+                                    text: "Delete",
+                                    click: function (e) {
+                                        var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                        console.log("Deleting item:", item); // Debug deletion
+                                        var url = "/TimeSheet/Position/DeletePosition";
+                                        $.ajax({
+                                            url: url,
+                                            data: { id: item.id },
+                                            type: 'GET',
+                                            success: function (result) {
+                                                $('#DeleteModalBody').html(result);
+                                                $("#myModaldeletor").modal("show");
+                                            },
+                                            error: function (xhr, status) {
+                                                alert("Error: " + status);
+                                            }
+                                        });
+                                    }
+                                },
+                                {
+                                    name: "edit",
+                                    text: "Edit",
+                                    click: function (e) {
+                                        var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                        console.log("Editing item:", item); // Debug edit
+                                        window.location.href = '@Url.Action("EditPosition", "Position")/' + item.id;
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                });
             
-
-            $("#grid").kendoGrid({
-                dataSource: {
-                    data: jsondata,
-                    pageSize: jsondata.length
-                },
-                height: 550,
-                filterable: true,
-                groupable: true,
-                sortable: true,
-                toolbar: ["pdf", "search","excel"],
-
-                pageable: {
-                    refresh: true,
-                    pageSizes: true,
-                    buttonCount: 5
-                },
-                columns: [{
-                    field: "id",
-                    title: "id"
-                }, {
-                    field: "userName",
-                    width: 150,
-                    title: "UserName"
-                }, {
-                    field: "positionType",
-                    width: 150,
-
-                    title: "Position Type"
-                },{
-                    field: "positionName",
-                    width: 150,
-                    title: "PositionName"
-                },{
-                    field: "formula",
-                    width: 150,
-                    title: "Formula"
-                },
-
-
-
-                    {
-                        command: [
-                            {
-                                name: "del",
-                                text: "Delete",
-                                click: function (e) {
-                                 
-                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
-                                    url = "/TimeSheet/Position/DeletePosition";
-                                    $.ajax({
-                                        url: url,
-                                        data: { id: item.id },
-                                        type: 'Get',
-                                        success: function (result) {
-                                            $('#DeleteModalBody').html(result);
-                                            $("#myModaldeletor").modal("show");
-                                        },
-                                        error: function (xhr, status) {
-                                            alert(status);
-                                        }
-                                    });
-                                }
-                            },
-                            {
-                                name: "edit",
-                                text: "Edit",
-                                click: function (e) {
-                                  
-                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
-                                    console.log(item )
-                                    window.location.href = '@Url.Action("EditPosition", "Position")/' + item.id;
-                                }
-                            },
-
-                        ]
-                    }
-                ]
-
-            });
-            var grid = $("#grid").data("kendoGrid");
-            grid.hideColumn("id");
-
-       
-
         });
+
 
 
     </script>

@@ -7,7 +7,7 @@ namespace Timesheet.Models.ViewModels.Admin
         public int Id { get; set; }
 
         [Display(Name = "یوزر")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Display(Name = "یوزرنیم")]
         public string UserName { get; set; }
