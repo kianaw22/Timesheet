@@ -11,7 +11,9 @@ namespace Timesheet.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
         }
-        public DbSet<Position> Posiiton { get; set; }
+        public DbSet<Position> Position { get; set; }
+        public object Posiiton { get; internal set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

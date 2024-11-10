@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "sn9E0gKjsDE=",
+  "dgSpecHash": "J7br9yjECFE=",
   "success": true,
   "projectFilePath": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\hosseini.k\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\hosseini.k\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\hosseini.k\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\hosseini.k\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\hosseini.k\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
@@ -178,6 +180,16 @@
       "warningLevel": 1,
       "message": "KendoUICore 2024.3.1015 does not provide an inclusive lower bound for dependency jQuery (<= 3.7.1). An approximate best match of jQuery 1.4.1 was resolved.",
       "libraryId": "jQuery",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1608",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 13.0.1 was resolved.",
+      "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"
       ]

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "l8+u6FFYSalkdBHL2aAgpWQrVoyIqLH0LK5EIEqtCRA=",
+  "Hash": "0kN5E0WWnmKeiw8qC6hln2o3ZXo5E7XfcRi9Is2g67E=",
   "Source": "Timesheet",
   "BasePath": "_content/Timesheet",
   "Mode": "Default",
@@ -18426,6 +18426,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\AdminLTE\\plugins\\timepicker\\bootstrap-timepicker.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\wwwroot\\css\\customStyle.css",
+      "SourceId": "Timesheet",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\wwwroot\\",
+      "BasePath": "_content/Timesheet",
+      "RelativePath": "css/customStyle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\customStyle.css"
     },
     {
       "Identity": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\wwwroot\\css\\site.css",

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Pkcs;
@@ -14,56 +15,94 @@ namespace Timesheet.Areas.AdminArea.Controllers
     public class PositionController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public PositionController(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public PositionController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
-            var positions = _context.Posiiton.ToList();
+            var positions = _context.Position.ToList();
             return View(positions);
         }
         public IActionResult AddPosition()
         {
-           ViewBag.user = _context.Users
-                 .Select(u => new
-                 {
-                     u.Id,
-                     u.UserName,
-                     FullName = u.Name + " " + u.Family
-                 }).ToList();
 
+            FillDropDown();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddPosition(PositionViewModel position)
         {
-            ViewBag.user = _context.Users
-               .Select(u => new
-               {
-                   u.Id,
-                   u.UserName,
-                   FullName = u.Name + " " + u.Family
-               }).ToList();
+
+            FillDropDown();
             if (ModelState.IsValid)
             {
-                var positionEntity = new Position
-                {
-                    UserId = position.UserId,
-                    UserName = position.UserName,
-                    PositionType = position.PositionType,
-                    PostionName = position.PostionName,
-                    Formula = position.Formula
-                };
+                var positionEntity = _mapper.Map<Position>(position);
                 _context.Add(positionEntity);
                _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(position);
         }
+        public IActionResult EditPosition(int id)
+        {
+            var position = _context.Position.Find(id);
+            if (position == null)
+            {
+                return NotFound();
+            }
 
-      
+            var positionViewModel = _mapper.Map<PositionViewModel>(position);
+            FillDropDown();
+            return View(positionViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditPosition(PositionViewModel positionViewModel)
+        {
+            FillDropDown();
+            if (ModelState.IsValid)
+            {
+                var positionEntity = _mapper.Map<Position>(positionViewModel);
+                _context.Update(positionEntity);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(positionViewModel);
+        }
+
+
+        public IActionResult DeletePosition()
+        {
+            return PartialView("_deletePosition");
+        }
+        [HttpPost]
+        public IActionResult DeletePosition(int id)
+        {
+            var entity = _context.Position.Find(id);
+            if (entity != null)
+            {
+                _context.Position.Remove(entity);
+                _context.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+        public void FillDropDown()
+        {
+            ViewBag.user = _context.Users
+              .Select(u => new
+              {
+                  u.Id,
+                  u.UserName,
+                  FullName = u.Name + " " + u.Family
+              }).ToList();
+        }
+
 
     }
 }

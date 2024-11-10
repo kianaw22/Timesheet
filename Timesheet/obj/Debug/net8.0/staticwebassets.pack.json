@@ -3873,6 +3873,10 @@
       "PackagePath": "staticwebassets\\AdminLTE\\plugins\\timepicker\\bootstrap-timepicker.min.js"
     },
     {
+      "Id": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\wwwroot\\css\\customStyle.css",
+      "PackagePath": "staticwebassets\\css\\customStyle.css"
+    },
+    {
       "Id": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

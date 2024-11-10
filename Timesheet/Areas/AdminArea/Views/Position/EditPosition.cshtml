@@ -1,34 +1,30 @@
 ﻿@model Timesheet.Models.ViewModels.Admin.PositionViewModel
-@using Timesheet.Models.Entities
 
 @{
-    ViewData["Title"] = "Add Position";
-    var UsersList = ViewBag.user;
+    ViewData["Title"] = "Edit Position";
 }
 
-
-
 <div class="panel panel-body container-fluid" style="border-radius: 2px; box-shadow: 3px 1px 1px 0 gray; background-color: #e6e2e2;">
-    <form asp-controller="Position" asp-action="AddPosition" method="post">
+    <form asp-action="EditPosition" method="post">
         <div class="col-md-6 col-md-offset-3">
             <!-- UserId (Dropdown for selecting user) -->
             <div class="form-group">
                 <label asp-for="UserId" class="control-label col-md-3 col-xs-12"></label>
-                <select asp-for="UserId" class="form-control" id="userIdSelect">
-                    <option value="">-- انتخاب یوزر --</option>
+                <select asp-for="UserId" class="form-control">
+                    <option value="">-- Select User --</option>
                     @foreach (var user in ViewBag.user)
                     {
                         <option value="@user.Id" selected="@(Model.UserId == user.Id ? "selected" : null)">@user.FullName</option>
                     }
-                    }
                 </select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
 
             <!-- UserName (Read-only field that auto-fills based on UserId) -->
             <div class="form-group">
                 <label asp-for="UserName" class="control-label col-md-3 col-xs-12"></label>
                 <div class="col-md-9 col-xs-12">
-                    <input asp-for="UserName" type="text" class="form-control custominput" id="userNameInput" placeholder="یوزرنیم" readonly />
+                    <input asp-for="UserName" type="text" class="form-control custominput" placeholder="Username" readonly />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
             </div>
@@ -38,10 +34,10 @@
                 <label asp-for="PositionType" class="control-label col-md-3 col-xs-12"></label>
                 <div class="col-md-9 col-xs-12">
                     <select asp-for="PositionType" class="form-control custominput">
-                        <option value="">-- انتخاب نوع سمت --</option>
-                        <option value="مدیر بخش">مدیر بخش</option>
-                        <option value="مدیر پروژه">مدیر پروژه</option>
-                        <option value="معاونت نفت و گاز">معاونت نفت و گاز</option>
+                        <option value="">-- Select Position Type --</option>
+                        <option value="مدیر پروژه" selected="@(Model.PositionType == "مدیر پروژه" ? "selected" : null)">مدیر پروژه</option>
+                        <option value="مدیر بخش" selected="@(Model.PositionType == "مدیر بخش" ? "selected" : null)">مدیر بخش</option>
+                        <option value="معاونت نفت و گاز" selected="@(Model.PositionType == "معاونت نفت و گاز" ? "selected" : null)">معاونت نفت و گاز</option>
                         <!-- Add more options as needed -->
                     </select>
                     <span asp-validation-for="PositionType" class="text-danger"></span>
@@ -52,7 +48,7 @@
             <div class="form-group">
                 <label asp-for="PostionName" class="control-label col-md-3 col-xs-12"></label>
                 <div class="col-md-9 col-xs-12">
-                    <input asp-for="PostionName" type="text" class="form-control custominput" placeholder="نام سمت" />
+                    <input asp-for="PostionName" type="text" class="form-control custominput" placeholder="Position Name" />
                     <span asp-validation-for="PostionName" class="text-danger"></span>
                 </div>
             </div>
@@ -61,7 +57,7 @@
             <div class="form-group">
                 <label asp-for="Formula" class="control-label col-md-3 col-xs-12"></label>
                 <div class="col-md-9 col-xs-12">
-                    <input asp-for="Formula" type="text" class="form-control custominput" placeholder="فرمول" />
+                    <input asp-for="Formula" type="text" class="form-control custominput" placeholder="Formula" />
                     <span asp-validation-for="Formula" class="text-danger"></span>
                 </div>
             </div>
@@ -69,26 +65,9 @@
             <!-- Submit Button -->
             <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn btn-primary">ارسال</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-
-
-@section Scripts {
-      
-    <script>
-        $(document).ready(function () {
-            $('#userIdSelect').change(function () {
-                var selectedOption = $(this).find('option:selected');
-                var userName = selectedOption.data('username');
-                $('#userNameInput').val(userName);
-            });
-        });
-    </script>
-}
-   
-
