@@ -18,9 +18,9 @@
                     <option value="">-- انتخاب یوزر --</option>
                     @foreach (var user in ViewBag.user)
                     {
-                        <option value="@user.Id" selected="@(Model.UserId == user.Id ? "selected" : null)">@user.FullName</option>
+                        <option value="@user.Id">@user.FullName</option>
                     }
-                    }
+                   
                 </select>
             </div>
 

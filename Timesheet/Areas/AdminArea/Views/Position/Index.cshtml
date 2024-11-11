@@ -24,7 +24,13 @@
         </a>
     </div>
 
-
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="deleteModalContent">
+                <!-- The partial view will be loaded here -->
+            </div>
+        </div>
+    </div>
     <div>
         <div class="k-rtl">
             <div id="grid"></div>
@@ -65,21 +71,14 @@
                                     name: "del",
                                     text: "Delete",
                                     click: function (e) {
-                                        var item = this.dataItem($(e.currentTarget).closest("tr"));
-                                        console.log("Deleting item:", item); // Debug deletion
-                                        var url = "/TimeSheet/Position/DeletePosition";
-                                        $.ajax({
-                                            url: url,
-                                            data: { id: item.id },
-                                            type: 'GET',
-                                            success: function (result) {
-                                                $('#DeleteModalBody').html(result);
-                                                $("#myModaldeletor").modal("show");
-                                            },
-                                            error: function (xhr, status) {
-                                                alert("Error: " + status);
-                                            }
-                                        });
+                                    e.preventDefault();
+                                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+                                    // Load the partial view into the modal
+                                    $.get('/Position/DeletePosition', { id: dataItem.Id }, function (response) {
+                                        $('#deleteModalContent').html(response);
+                                        $('#deleteModal').modal('show');
+                                    });
                                     }
                                 },
                                 {

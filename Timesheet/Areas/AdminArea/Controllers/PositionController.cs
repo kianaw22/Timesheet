@@ -76,12 +76,18 @@ namespace Timesheet.Areas.AdminArea.Controllers
         }
 
 
-        public IActionResult DeletePosition()
+        public IActionResult DeletePosition(int id )
         {
-            return PartialView("_deletePosition");
+            var position = _context.Position.FirstOrDefault(p => p.Id == id);
+            if (position == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_DeletePosition", position);
         }
         [HttpPost]
-        public IActionResult DeletePosition(int id)
+        public IActionResult DeletePositionPost(int id)
         {
             var entity = _context.Position.Find(id);
             if (entity != null)
