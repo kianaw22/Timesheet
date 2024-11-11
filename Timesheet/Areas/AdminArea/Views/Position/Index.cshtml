@@ -75,7 +75,7 @@
                                     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
                                     // Load the partial view into the modal
-                                    $.get('/Position/DeletePosition', { id: dataItem.Id }, function (response) {
+                                    $.get('Position/DeletePosition', { id: dataItem.id }, function (response) {
                                         $('#deleteModalContent').html(response);
                                         $('#deleteModal').modal('show');
                                     });

@@ -75,7 +75,7 @@ namespace Timesheet.Areas.AdminArea.Controllers
             return View(positionViewModel);
         }
 
-
+        [HttpGet]
         public IActionResult DeletePosition(int id )
         {
             var position = _context.Position.FirstOrDefault(p => p.Id == id);
