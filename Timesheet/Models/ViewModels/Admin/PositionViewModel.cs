@@ -16,9 +16,16 @@ namespace Timesheet.Models.ViewModels.Admin
         public string PositionType { get; set; }
 
         [Display(Name = "نام سمت")]
-        public string PostionName { get; set; }
+        public string PositionName { get; set; }
 
-        [Display(Name = "فرمول")]
-        public string Formula { get; set; }
+        [Display(Name = "فرمول فیلتر")]
+        public string? Filtering { get; set; }
+
+        [Display(Name = "فرمول گروه")]
+        public string? Grouping { get; set; }
+
+
+        [Display(Name = "ترتیب")]
+        public int? Order { get; set; }
     }
 }

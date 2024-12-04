@@ -10,7 +10,7 @@
 
 <div class="panel panel-body container-fluid" style="border-radius: 2px; box-shadow: 3px 1px 1px 0 gray; background-color: #e6e2e2;">
     <form asp-controller="Position" asp-action="AddPosition" method="post">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-3">
             <!-- UserId (Dropdown for selecting user) -->
             <div class="form-group">
                 <label asp-for="UserId" class="control-label col-md-3 col-xs-12"></label>
@@ -18,7 +18,7 @@
                     <option value="">-- انتخاب یوزر --</option>
                     @foreach (var user in ViewBag.user)
                     {
-                        <option value="@user.Id">@user.FullName</option>
+                        <option value="@user.Id" data-username="@user.UserName">@user.FullName</option>
                     }
                    
                 </select>
@@ -27,7 +27,7 @@
             <!-- UserName (Read-only field that auto-fills based on UserId) -->
             <div class="form-group">
                 <label asp-for="UserName" class="control-label col-md-3 col-xs-12"></label>
-                <div class="col-md-9 col-xs-12">
+                <div >
                     <input asp-for="UserName" type="text" class="form-control custominput" id="userNameInput" placeholder="یوزرنیم" readonly />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
@@ -36,12 +36,15 @@
             <!-- PositionType -->
             <div class="form-group">
                 <label asp-for="PositionType" class="control-label col-md-3 col-xs-12"></label>
-                <div class="col-md-9 col-xs-12">
+                <div >
                     <select asp-for="PositionType" class="form-control custominput">
                         <option value="">-- انتخاب نوع سمت --</option>
                         <option value="مدیر بخش">مدیر بخش</option>
                         <option value="مدیر پروژه">مدیر پروژه</option>
                         <option value="معاونت نفت و گاز">معاونت نفت و گاز</option>
+                        <option value="معاونت آب و انرژی">معاونت آب و انرژی</option>
+                        <option value="معاونت پشتیبانی">معاونت پشتیبانی</option>
+                        <option value="مدیر عامل">مدیر عامل</option>
                         <!-- Add more options as needed -->
                     </select>
                     <span asp-validation-for="PositionType" class="text-danger"></span>
@@ -50,19 +53,19 @@
 
             <!-- PostionName -->
             <div class="form-group">
-                <label asp-for="PostionName" class="control-label col-md-3 col-xs-12"></label>
-                <div class="col-md-9 col-xs-12">
-                    <input asp-for="PostionName" type="text" class="form-control custominput" placeholder="نام سمت" />
-                    <span asp-validation-for="PostionName" class="text-danger"></span>
+                <label asp-for="PositionName" class="control-label col-md-3 col-xs-12"></label>
+                <div >
+                    <input asp-for="PositionName" type="text" class="form-control custominput" placeholder="نام سمت" />
+                    <span asp-validation-for="PositionName" class="text-danger"></span>
                 </div>
             </div>
 
             <!-- Formula -->
             <div class="form-group">
-                <label asp-for="Formula" class="control-label col-md-3 col-xs-12"></label>
-                <div class="col-md-9 col-xs-12">
-                    <input asp-for="Formula" type="text" class="form-control custominput" placeholder="فرمول" />
-                    <span asp-validation-for="Formula" class="text-danger"></span>
+                <label asp-for="Filtering" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <input asp-for="Filtering" type="text" class="form-control custominput" placeholder="  فیلتر فرمول" />
+                    <span asp-validation-for="Filtering" class="text-danger"></span>
                 </div>
             </div>
 
@@ -84,7 +87,9 @@
         $(document).ready(function () {
             $('#userIdSelect').change(function () {
                 var selectedOption = $(this).find('option:selected');
+                console.log(selectedOption.data());
                 var userName = selectedOption.data('username');
+             
                 $('#userNameInput').val(userName);
             });
         });

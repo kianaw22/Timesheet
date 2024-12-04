@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.Data;
 
@@ -11,9 +12,11 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241116084529_mig10")]
+    partial class mig10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,9 +151,6 @@ namespace Timesheet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Counter")
-                        .HasColumnType("int");
-
                     b.Property<string>("Filtering")
                         .HasColumnType("nvarchar(max)");
 
@@ -168,9 +168,6 @@ namespace Timesheet.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Signed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -184,164 +181,7 @@ namespace Timesheet.Migrations
                     b.ToTable("Position");
                 });
 
-            modelBuilder.Entity("Timesheet.Models.Entities.ApplicationRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            Name = "User"
-                        });
-                });
-
-            modelBuilder.Entity("Timesheet.Models.Entities.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Family")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("IsAdmin")
-                        .HasColumnType("tinyint");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "admin-user-id",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0fb481f-5a8d-42b6-a8a3-94519ce7cda2",
-                            EmailConfirmed = false,
-                            Family = "AdminFamily",
-                            IsAdmin = (byte)1,
-                            LockoutEnabled = false,
-                            Name = "AdminName",
-                            NormalizedUserName = "ADMIN",
-                            Password = "Admin@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAwvR+sWLtxEdXfDaTO+G9ThEk2kFwjiExBEw9BLKgbKy8GevH7fXSSFEzVOdspYYw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "627b2371-3a15-40b1-943c-0f3e2da62fc5",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            Id = "normal-user-id",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e9659d8-cfd5-43f3-86c3-b757dfb4fcfe",
-                            EmailConfirmed = false,
-                            Family = "UserFamily",
-                            IsAdmin = (byte)0,
-                            LockoutEnabled = false,
-                            Name = "UserName",
-                            NormalizedUserName = "USER",
-                            Password = "User@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAECQfBJbgmZkZ3pZ3LjKn3eNvqpjUXaz/+aI/SPhSJOmIx53mnQFbUiK6qmQRNt6Nyw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1354825-2b58-46f9-8b9b-792fb7ae2063",
-                            TwoFactorEnabled = false,
-                            UserName = "user"
-                        });
-                });
-
-            modelBuilder.Entity("Timesheet.Models.Entities.User.Timesheet", b =>
+            modelBuilder.Entity("Timesheet.Models.Entities.Admin.Timesheet", b =>
                 {
                     b.Property<long>("autoNumber")
                         .ValueGeneratedOnAdd()
@@ -551,6 +391,163 @@ namespace Timesheet.Migrations
                     b.HasKey("autoNumber");
 
                     b.ToTable("Timesheet");
+                });
+
+            modelBuilder.Entity("Timesheet.Models.Entities.ApplicationRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "User"
+                        });
+                });
+
+            modelBuilder.Entity("Timesheet.Models.Entities.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Family")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("IsAdmin")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "admin-user-id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "374dcca6-5af7-4fde-90e2-d3ed628334d8",
+                            EmailConfirmed = false,
+                            Family = "AdminFamily",
+                            IsAdmin = (byte)1,
+                            LockoutEnabled = false,
+                            Name = "AdminName",
+                            NormalizedUserName = "ADMIN",
+                            Password = "Admin@123",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPs7LEVutWMA3VhSyiKMfywk/XNJMq8xg9X60NmyuwoWlMtD617PxeCG0rOgmfREqg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9710bf88-90f9-432a-ac2d-6200e3a95f4f",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "normal-user-id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3991a9c9-c18b-4445-99f6-0c10dbfc1921",
+                            EmailConfirmed = false,
+                            Family = "UserFamily",
+                            IsAdmin = (byte)0,
+                            LockoutEnabled = false,
+                            Name = "UserName",
+                            NormalizedUserName = "USER",
+                            Password = "User@123",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBTQDVir+40TYssE/U5oCBjYGFrp+yhSKhTh+OyL4koBcHG4hrSs2UJa1qDnruPPiA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "511b99e5-3f29-4edd-bfd2-54139a1c01c2",
+                            TwoFactorEnabled = false,
+                            UserName = "user"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

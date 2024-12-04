@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Timesheet.Models.Entities.User.Timesheet>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">تایم شیت</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="background-color: lightgray ;box-shadow:3px 1px 1px 0 grey; border-radius:2px; margin-bottom: 5px">
+        <span style="font-weight:bold;">
+
+            لیست تایم شیت
+        </span>
+    </div>
+   
+
+    <div>
+        <div class="k-rtl">
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+   
+   <script>
+    var jsonData = JSON.parse('@Html.Raw(ViewBag.JsonData)');
+    var groupingData = JSON.parse('@Html.Raw(ViewBag.GroupingData)' || "[]");
+
+    $(document).ready(function () {
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: jsonData,
+                schema: {
+                    model: {
+                        fields: {
+                            extraWork: { type: "number" } // Ensure 'extraWork' is treated as a number
+                        }
+                    }
+                },
+                pageSize: 100,
+                group: groupingData,
+                aggregate: [{ field: "extraWork", aggregate: "sum" }]
+               
+            },
+            height: 550,
+            pageable: {
+                refresh: true,
+                pageSizes: [5, 10, 100, 500, jsonData.length],
+                buttonCount: 5
+            },
+            groupable: true,
+            sortable: true,
+            filterable: true,
+            columns: [
+                { field: "persCode", title: "Personel Code", width: "200px" },
+                { field: "fName", title: "First Name", width: "150px" },
+                { field: "lName", title: "Last Name", width: "150px" },
+                { field: "date", title: "Date", width: "120px" },
+                { field: "discipline", title: "Discipline", width: "150px" },
+                { field: "prjCode", title: "Project Code", width: "150px" },
+                { field: "phase", title: "Phase", width: "150px" },
+                { field: "docName", title: "Document Name", width: "300px" },
+                { field: "pPercent", title: "Percent", width: "100px" },
+                {
+                    field: "extraWork",
+                    title: "Extra Work",
+                    width: "150px",
+                        template: function (dataItem) {
+                            // Convert each extraWork value to hh:mm format
+                            var totalMinutes = dataItem.extraWork || 0;
+                            var hours = Math.floor(totalMinutes / 60);
+                            var minutes = totalMinutes % 60;
+                            return `${hours}:${minutes.toString().padStart(2, '0')}`;
+                        },
+                    groupHeaderColumnTemplate: function (e) {
+                        var totalMinutes = e.aggregates.extraWork.sum || 0;
+                        var hours = Math.floor(totalMinutes / 60);
+                        var minutes = totalMinutes % 60;
+                        return `Total EW:${hours}:${minutes.toString().padStart(2, '0')} `;
+                    },
+                    aggregates: ["sum"] 
+
+                },
+                    {   
+                        width : "150px",
+                        command: [
+                            {
+                                name: "Accept",
+                                text: "تایید",
+                                click: function (e) {
+                                    e.preventDefault();
+                                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+                                    // Load the partial view into the modal
+                                    $.get('Position/DeletePosition', { id: dataItem.id }, function (response) {
+                                        $('#deleteModalContent').html(response);
+                                        $('#deleteModal').modal('show');
+                                    });
+                                },
+                                className: "k-button customGreen1"
+                            },
+                            {
+                                name: "Reject",
+                                text: "عدم تایید",
+                                click: function (e) {
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    console.log("Editing item:", item); // Debug edit
+                                    window.location.href = '@Url.Action("EditPosition", "Position")/' + item.id;
+                                },
+                                className: "k-button customRed1"
+                            }
+                        ]
+                    }
+            ]
+        });
+        console.log("here");
+            
+
+    });
+</script>
+
+
+
+ }

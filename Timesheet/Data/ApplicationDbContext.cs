@@ -12,7 +12,9 @@ namespace Timesheet.Data
         {
         }
         public DbSet<Position> Position { get; set; }
-        public object Posiiton { get; internal set; }
+
+        public DbSet<Models.Entities.User.Timesheet> Timesheet { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

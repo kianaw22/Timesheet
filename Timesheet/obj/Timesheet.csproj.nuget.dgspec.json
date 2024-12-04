@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj": {}
+    "D:\\Timesheet\\Timesheet\\Timesheet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj": {
+    "D:\\Timesheet\\Timesheet\\Timesheet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
+        "projectUniqueName": "D:\\Timesheet\\Timesheet\\Timesheet.csproj",
         "projectName": "Timesheet",
-        "projectPath": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\Timesheet.csproj",
+        "projectPath": "D:\\Timesheet\\Timesheet\\Timesheet.csproj",
         "packagesPath": "C:\\Users\\hosseini.k\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hosseini.k\\Desktop\\Timesheet\\Timesheet\\obj\\",
+        "outputPath": "D:\\Timesheet\\Timesheet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hosseini.k\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -50,10 +50,6 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[12.0.1, )"
-            },
             "KendoUICore": {
               "target": "Package",
               "version": "[2024.3.1015, )"
@@ -78,7 +74,11 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
+            },
+            "System.Linq.Dynamic.Core": {
+              "target": "Package",
+              "version": "[1.4.9, )"
             }
           },
           "imports": [
@@ -100,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

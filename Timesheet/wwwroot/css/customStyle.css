@@ -1,33 +1,33 @@
-﻿@font-face {
-    font-family: 'IRANSansWeb';
-    src: url('/fonts/IRANSansWeb.eot');
-    src: url('/fonts/IRANSansWeb.eot') format('embedded-opentype'), url('/fonts/IRANSansWeb.woff') format('woff'), url('/fonts/IRANSansWeb.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+﻿
+#grid {
+    font-size: 0.8rem !important; /* This will apply the font size to all text inside the grid */
 }
 
+    /* If you need to target the header as well */
+    #grid .k-grid-header {
+        font-size: 0.8rem !important;
+    }
 
-body {
-    font-family: 'IRANSansWeb' !important;
-    font-weight: 400;
-}
+    /* Target Kendo Grid cells */
+    #grid .k-grid-content td {
+        font-size: 0.8rem !important;
+    }
 
-.mainPic {
-    background-image: linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0)),url("/publicimage/CNe3kfe-oil-rig-wallpaper.jpg");
-    background-repeat: no-repeat;
-    height: auto;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-
-.customGreen1 {
-    border: 1px solid gray;
-    border-radius: 3px;
+    /* For any other specific grid component you want to resize */
+    #grid .k-grid-footer {
+        font-size: 0.8rem !important;
+    }
+.k-button.customGreen1 {
+    border: 1px solid gray !important;
+    border-radius: 3px !important;
     color: black !important;
-    background-color: #d0f7c9;
+    background-color: #d0f7c9 !important;
+  
+    padding: 6px 12px !important;
+    text-align: center !important;
 }
+
+
 
 .customBlue1 {
     border: 1px solid gray;
@@ -43,11 +43,11 @@ body {
     background-color: #e8efa7;
 }
 
-.customRed1 {
-    border: 1px solid gray;
-    border-radius: 3px;
+.k-button.customRed1 {
+    border: 1px solid gray !important;
+    border-radius: 3px !important;
     color: black !important;
-    background-color: #f59f9f;
+    background-color: #f59f9f !important;
 }
 
 .custominput {

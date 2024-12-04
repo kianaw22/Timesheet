@@ -42,7 +42,7 @@ namespace Timesheet.Areas.AdminArea.Controllers
             {
                 var positionEntity = _mapper.Map<Position>(position);
                 _context.Add(positionEntity);
-               _context.SaveChangesAsync();
+               _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(position);
@@ -94,7 +94,7 @@ namespace Timesheet.Areas.AdminArea.Controllers
             {
                 _context.Position.Remove(entity);
                 _context.SaveChanges();
-                return Ok();
+                return RedirectToAction("Index");
             }
             return NotFound();
         }
