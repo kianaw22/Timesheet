@@ -1,0 +1,71 @@
+﻿@model Timesheet.Models.ViewModels.Admin.UserManagerViewModel
+@using Timesheet.Models.Entities
+
+@{
+    ViewData["Title"] = "Edit User";
+
+}
+
+
+
+<div class="panel panel-body container-fluid" style="border-radius: 2px; box-shadow: 3px 1px 1px 0 gray; background-color: #E8ECEC;">
+    <form asp-controller="UserManager" asp-action="EditUserManager" method="post">
+        <div class="col-md-8 col-md-offset-3">
+
+            <!-- UserName (Read-only field that auto-fills based on UserId) -->
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label col-md-3 col-xs-12">یوزرنیم</label>
+                <div>
+                    <input asp-for="UserName" type="text" class="form-control custominput" id="userNameInput" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label col-md-3 col-xs-12">نام</label>
+                <div>
+                    <input asp-for="Name" type="text" class="form-control custominput" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Family" class="control-label col-md-3 col-xs-12">نام خانوادگی</label>
+                <div>
+                    <input asp-for="Family" type="text" class="form-control custominput" />
+                    <span asp-validation-for="Family" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12">کد پرسنلی</label>
+                <div>
+                    <input asp-for="PersonelCode" type="text" class="form-control custominput" />
+                    <span asp-validation-for="PersonelCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label col-md-3 col-xs-12">پسورد</label>
+                <div>
+                    <input asp-for="Password" type="text" class="form-control custominput" id="userNameInput" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsAdmin" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <select asp-for="IsAdmin" class="form-control custominput">
+                        <option value="">-- انتخاب نوع یوزر --</option>
+                        <option value="true" selected="@(Model.IsAdmin == true ? "selected" : null)">Yes</option>
+                        <option value="false" selected="@(Model.IsAdmin == false ? "selected" : null)">No</option>
+                    </select>
+                    <span asp-validation-for="IsAdmin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-primary">ارسال</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

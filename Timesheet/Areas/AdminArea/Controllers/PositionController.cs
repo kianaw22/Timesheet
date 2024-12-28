@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Pkcs;
 using Timesheet.Data;
@@ -40,9 +41,10 @@ namespace Timesheet.Areas.AdminArea.Controllers
             FillDropDown();
             if (ModelState.IsValid)
             {
-                var positionEntity = _mapper.Map<Position>(position);
-                _context.Add(positionEntity);
-               _context.SaveChanges();
+                var positionEntity = _mapper.Map<Models.Entities.Admin.Position>(position);
+                _context.Position.Add(positionEntity);
+                _context.SaveChanges(); 
+                
                 return RedirectToAction("Index");
             }
             return View(position);
@@ -67,9 +69,11 @@ namespace Timesheet.Areas.AdminArea.Controllers
             FillDropDown();
             if (ModelState.IsValid)
             {
-                var positionEntity = _mapper.Map<Position>(positionViewModel);
+                var positionEntity = _mapper.Map<Models.Entities.Admin.Position>(positionViewModel);
                 _context.Update(positionEntity);
                 _context.SaveChanges();
+               
+
                 return RedirectToAction("Index");
             }
             return View(positionViewModel);

@@ -165,7 +165,7 @@
                             <img src="~/adminlte/dist/img/avatar2.png " class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">دریاپالا انرژی</a>
+                            <a href="#" class="d-block">@User.Identity.Name</a>
                         </div>
                     </div>
 
@@ -174,8 +174,10 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
+                            @*
                             <li class="nav-item has-treeview menu-open">
                                 <a href="#" class="nav-link active">
+                                   
                                     <i class="nav-icon fa fa-dashboard"></i>
                                     <p>
                                         داشبوردها
@@ -203,6 +205,17 @@
                                     </li>
                                 </ul>
                             </li>
+                                    *@
+                            <li class="nav-item">
+                                <a href=@Url.Action("Index", "Timesheet") class="nav-link">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        تایم شیت
+                                        <span id="userPosition"></span>
+                                    </p>
+                                </a>
+                            </li>
+                            @*
                             <li class="nav-item">
                                 <a href="pages/widgets.html" class="nav-link">
                                     <i class="nav-icon fa fa-th"></i>
@@ -469,6 +482,7 @@
                                     <p>اطلاعات</p>
                                 </a>
                             </li>
+                            *@
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -554,6 +568,21 @@
 
     <!--Kendoo ui-->
     <script src="~/lib/kendo/js/kendo.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/UserArea/Timesheet/GetUserPosition", // Update URL as per your route
+                method: "GET",
+                success: function (response) {
+                    $("#userPosition").text(`(${response.position})`);
+                },
+                error: function () {
+                    $("#userPosition").text("(No Position)");
+                }
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

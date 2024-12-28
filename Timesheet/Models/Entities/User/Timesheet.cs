@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Timesheet.Models.Entities.User
 {
@@ -136,6 +137,7 @@ namespace Timesheet.Models.Entities.User
         public bool PrjHead { get; set; }
         public bool EngHead { get; set; }
         public bool GasDpt { get; set; }
+        public bool BusDpt { get; set; }
         public bool SupDpt { get; set; }
         public bool WtrDpt { get; set; }
         public bool Ceo { get; set; }

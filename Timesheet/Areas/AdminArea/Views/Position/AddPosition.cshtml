@@ -18,7 +18,7 @@
                     <option value="">-- انتخاب یوزر --</option>
                     @foreach (var user in ViewBag.user)
                     {
-                        <option value="@user.Id" data-username="@user.UserName">@user.FullName</option>
+                        <option value="@user.Id" data-username="@user.UserName">@user.UserName</option>
                     }
                    
                 </select>
@@ -37,14 +37,16 @@
             <div class="form-group">
                 <label asp-for="PositionType" class="control-label col-md-3 col-xs-12"></label>
                 <div >
-                    <select asp-for="PositionType" class="form-control custominput">
+                    <select asp-for="PositionType" class="form-control custominput" id="positionTypeDropdown">
                         <option value="">-- انتخاب نوع سمت --</option>
-                        <option value="مدیر بخش">مدیر بخش</option>
-                        <option value="مدیر پروژه">مدیر پروژه</option>
-                        <option value="معاونت نفت و گاز">معاونت نفت و گاز</option>
-                        <option value="معاونت آب و انرژی">معاونت آب و انرژی</option>
-                        <option value="معاونت پشتیبانی">معاونت پشتیبانی</option>
-                        <option value="مدیر عامل">مدیر عامل</option>
+                        <option value="مدیر بخش" data-code="1">مدیر بخش</option>
+                        <option value="مدیر پروژه" data-code="3">مدیر پروژه</option>
+                        <option value="معاونت نفت و گاز" data-code="4">معاونت نفت و گاز</option>
+                        <option value="معاونت آب و انرژی" data-code="4">معاونت آب و انرژی</option>
+                        <option value="معاونت پشتیبانی" data-code="4">معاونت پشتیبانی</option>
+                        <option value="مدیر عامل" data-code="5">مدیر عامل</option>
+                        <option value="معاونت مهندسی" data-code="2">معاونت مهندسی</option>
+                        <option value="معاونت توسعه کسب و کار" data-code="4">معاونت توسعه کسب و کار</option>
                         <!-- Add more options as needed -->
                     </select>
                     <span asp-validation-for="PositionType" class="text-danger"></span>
@@ -59,16 +61,44 @@
                     <span asp-validation-for="PositionName" class="text-danger"></span>
                 </div>
             </div>
-
-            <!-- Formula -->
+            <div class="form-group">
+                <label asp-for="PositionCode" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <input asp-for="PositionCode" type="number" class="form-control custominput" placeholder="کد سمت" id="positionCodeField" readonly  />
+                    <span asp-validation-for="PositionCode" class="text-danger"></span>
+                </div>
+            </div>
+            <!-- Filtering -->
             <div class="form-group">
                 <label asp-for="Filtering" class="control-label col-md-3 col-xs-12"></label>
                 <div>
-                    <input asp-for="Filtering" type="text" class="form-control custominput" placeholder="  فیلتر فرمول" />
+                    <input asp-for="Filtering" type="text" class="form-control custominput ltr" placeholder="فرمول فیلتر" />
                     <span asp-validation-for="Filtering" class="text-danger"></span>
                 </div>
             </div>
+            <!-- Grouping -->
+            <div class="form-group">
+                <label asp-for="Grouping" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <input asp-for="Grouping" type="text" class="form-control custominput ltr" placeholder="فرمول گروه" />
+                    <span asp-validation-for="Grouping" class="text-danger"></span>
+                </div>
+            </div>
 
+            <!-- Signed -->
+            <div class="form-group">
+                <label asp-for="Signed" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <select asp-for="Signed" class="form-control custominput">
+                        <option value="true" >بله</option>
+                        <option value="false" selected >خیر</option>
+
+
+                        <!-- Add more options as needed -->
+                    </select>
+                    <span asp-validation-for="Signed" class="text-danger"></span>
+                </div>
+            </div>
             <!-- Submit Button -->
             <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
@@ -91,6 +121,12 @@
                 var userName = selectedOption.data('username');
              
                 $('#userNameInput').val(userName);
+            });
+
+            $('#positionTypeDropdown').change(function () {
+                var selectedOption = $(this).find('option:selected');
+                var positionCode = selectedOption.data('code');
+                $('#positionCodeField').val(positionCode || '');
             });
         });
     </script>

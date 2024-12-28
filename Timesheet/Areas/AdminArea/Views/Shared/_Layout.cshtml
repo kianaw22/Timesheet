@@ -174,7 +174,25 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
+                            <li class="nav-item">
+                                <a href=@Url.Action("Index", "UserManager") class="nav-link">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                        یوزر ها
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href=@Url.Action("Index", "Position") class="nav-link">
+                                    <i class="nav-icon fa fa-th"></i>
+                                    <p>
+                                       سمت ها
+                                    </p>
+                                </a>
+                            </li>
+                            @*
                             <li class="nav-item has-treeview menu-open">
+
                                 <a href="#" class="nav-link active">
                                     <i class="nav-icon fa fa-dashboard"></i>
                                     <p>
@@ -469,6 +487,7 @@
                                     <p>اطلاعات</p>
                                 </a>
                             </li>
+                            *@
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -484,7 +503,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">داشبورد</h1>
+                            <h1 class="m-0 text-dark"></h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-left">

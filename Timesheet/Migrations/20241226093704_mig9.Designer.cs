@@ -12,8 +12,8 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241029115008_mig1")]
-    partial class mig1
+    [Migration("20241226093704_mig9")]
+    partial class mig9
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,6 +143,47 @@ namespace Timesheet.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Timesheet.Models.Entities.Admin.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Filtering")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Grouping")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PositionCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PositionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PositionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Signed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Position");
+                });
+
             modelBuilder.Entity("Timesheet.Models.Entities.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -173,12 +214,14 @@ namespace Timesheet.Migrations
                         new
                         {
                             Id = "1",
-                            Name = "Admin"
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            Name = "User"
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -202,11 +245,10 @@ namespace Timesheet.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Family")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("IsAdmin")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -215,7 +257,6 @@ namespace Timesheet.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -231,6 +272,9 @@ namespace Timesheet.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonelCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -266,16 +310,17 @@ namespace Timesheet.Migrations
                         {
                             Id = "admin-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b4ca62bd-3c1d-4e23-82c5-8dec2ce742a7",
+                            ConcurrencyStamp = "6c88b9b1-af20-4b2d-b20e-832b1a153413",
                             EmailConfirmed = false,
                             Family = "AdminFamily",
-                            IsAdmin = (byte)1,
+                            IsAdmin = true,
                             LockoutEnabled = false,
                             Name = "AdminName",
+                            NormalizedUserName = "ADMIN",
                             Password = "Admin@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAENdXSJIsbtKKCxuAoP3OvrFnx9rMie5GnOeU6lOKa6EWX8bE4i0hfHuCvwjYZe/5nw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELzOCq+7rd+ozRG0d3g9Nsu1fmkDy50MNzflE0cQKoVXwFz2/GFTxDZGXu7DPuY8hg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ded867d2-31f4-41e0-b7ee-9c033a108c54",
+                            SecurityStamp = "5457aa03-34a4-4c75-b344-8c021de92856",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -283,19 +328,235 @@ namespace Timesheet.Migrations
                         {
                             Id = "normal-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "729b3371-379d-4c27-8eb3-a63eb29c19bb",
+                            ConcurrencyStamp = "3190c211-0efe-437f-aa70-d27e1f9f7eb7",
                             EmailConfirmed = false,
                             Family = "UserFamily",
-                            IsAdmin = (byte)0,
+                            IsAdmin = false,
                             LockoutEnabled = false,
                             Name = "UserName",
+                            NormalizedUserName = "USER",
                             Password = "User@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEClHN9q3lXDspBSeuYlJvY6doweB6m8/itkZin2Ye1XiB9VrCBTsJkAnKowRXGa+dg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOTPIBq9zR3bwn8WAP5HInT18poT2eX19vSDJbDq97KBPIMQaRFbxfR0bCu84ZGFsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d71ec27f-35b8-4eef-ae26-f0c26a542afc",
+                            SecurityStamp = "adff24f3-d148-46e0-8da4-adbc7ff2afb9",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         });
+                });
+
+            modelBuilder.Entity("Timesheet.Models.Entities.User.Timesheet", b =>
+                {
+                    b.Property<long>("autoNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("autoNumber"));
+
+                    b.Property<bool>("BusDpt")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Ceo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("DepHead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("EngHead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("GasDpt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NotAccept")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PrjHead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("SupDpt")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("WtrDpt")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("absenceM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("company")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("contractType")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<float?>("dMWork")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("dailyPercent")
+                        .HasColumnType("int");
+
+                    b.Property<string>("date")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("dayOfWeek")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int?>("delayPercM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("description1")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("description2")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("discipline")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("docCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("docName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("domainName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("exitTime")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<int?>("extraMissionM")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("extraWork")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("extraWorkFraction")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("extraWorkLimitM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("fName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("fNamePersian")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("flag")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("holiday")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("homeWorkM")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("iExitM")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("inMissionM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("interTime")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("lName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("lNamePersian")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("missionM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("month")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("monthlyDue")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("overTimeM")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("overtimeLimitM")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("pPercent")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("paymentLimitM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("period")
+                        .HasMaxLength(7)
+                        .HasColumnType("nvarchar(7)");
+
+                    b.Property<int>("persCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("personnelDepartment")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("phase")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("prjCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("prjName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int?>("sumM_tMWork_extraWork_extraMission_homeWork_extraWorkFraction")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("tMWork")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("timeSheetMWork")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("vacationM")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("vacationPayM")
+                        .HasColumnType("int");
+
+                    b.Property<string>("year")
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.HasKey("autoNumber");
+
+                    b.ToTable("Timesheet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

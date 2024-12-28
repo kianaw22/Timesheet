@@ -14,7 +14,7 @@
                     <option value="">-- Select User --</option>
                     @foreach (var user in ViewBag.user)
                     {
-                        <option value="@user.Id"  data-username="@user.UserName" selected="@(Model.UserId == user.Id ? "selected" : null)">@user.FullName</option>
+                        <option value="@user.Id"  data-username="@user.UserName" selected="@(Model.UserId == user.Id ? "selected" : null)">@user.UserName</option>
                     }
                 </select>
                 <span asp-validation-for="UserId" class="text-danger"></span>
@@ -35,13 +35,14 @@
                 <div >
                     <select asp-for="PositionType" class="form-control custominput">
                         <option value="">-- Select Position Type --</option>
-                        <option value="مدیر پروژه" selected="@(Model.PositionType == "مدیر پروژه" ? "selected" : null)">مدیر پروژه</option>
-                        <option value="مدیر بخش" selected="@(Model.PositionType == "مدیر بخش" ? "selected" : null)">مدیر بخش</option>
-                        <option value="معاونت نفت و گاز" selected="@(Model.PositionType == "معاونت نفت و گاز" ? "selected" : null)">معاونت نفت و گاز</option>
-                        <option value="معاو                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    نت آب و انرژی" selected="@(Model.PositionType == "معاونت آب و انرژی" ? "selected" : null)">معاونت آب و انرژی</option>
-                        <option value="معاونت پشتیبانی" selected="@(Model.PositionType == "معاونت پشتیبانی" ? "selected" : null)">معاونت پشتیبانی</option>
-                        <option value="مدیر عامل" selected="@(Model.PositionType == "مدیر عامل " ? "selected" : null)">مدیر عامل</option>
-                       
+                        <option value="مدیر پروژه" data-code="3" selected="@(Model.PositionType == "مدیر پروژه" ? "selected" : null)">مدیر پروژه</option>
+                        <option value="مدیر بخش" data-code="1" selected="@(Model.PositionType == "مدیر بخش" ? "selected" : null)">مدیر بخش</option>
+                        <option value="معاونت نفت و گاز" data-code="4" selected="@(Model.PositionType == "معاونت نفت و گاز" ? "selected" : null)">معاونت نفت و گاز</option>
+                        <option value="معاونت آب و انرژی" data-code="4" selected="@(Model.PositionType == "معاونت آب و انرژی" ? "selected" : null)">معاونت آب و انرژی</option>
+                        <option value="معاونت پشتیبانی" data-code="4" selected="@(Model.PositionType == "معاونت پشتیبانی" ? "selected" : null)">معاونت پشتیبانی</option>
+                        <option value="مدیر عامل" data-code="5" selected="@(Model.PositionType == "مدیر عامل " ? "selected" : null)">مدیر عامل</option>
+                        <option value="معاونت مهندسی" data-code="2" selected="@(Model.PositionType == "معاونت مهندسی " ? "selected" : null)">معاونت مهندسی</option>
+                        <option value="معاونت توسعه کسب و کار" data-code="4" selected="@(Model.PositionType == "معاونت توسعه کسب و کار " ? "selected" : null)">معاونت توسعه کسب و کار</option>
                         <!-- Add more options as needed -->
                     </select>
                     <span asp-validation-for="PositionType" class="text-danger"></span>
@@ -56,16 +57,47 @@
                     <span asp-validation-for="PositionName" class="text-danger"></span>
                 </div>
             </div>
-
-            <!-- Formula -->
+            <!-- PositionCode -->
             <div class="form-group">
-                <label asp-for="Filtering" class="control-label col-md-3 col-xs-12"></label>
-                <div >
-                    <input asp-for="Filtering" type="text" class="form-control custominput" placeholder="Formula" />
-                    <span asp-validation-for="Filtering" class="text-danger"></span>
+                <label asp-for="PositionCode" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <input asp-for="PositionCode" type="text" class="form-control custominput" placeholder="Position Name" readonly />
+                    <span asp-validation-for="PositionCode" class="text-danger"></span>
                 </div>
             </div>
 
+           
+            <!-- Signed -->
+            <div class="form-group">
+                <label asp-for="Signed" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <select asp-for="Signed" class="form-control custominput">
+                        <option value="true" selected="@(Model.Signed == true ? "selected" : null)">بله</option>
+                        <option value="false" selected="@(Model.Signed ==false ? "selected" : null)">خیر</option>
+
+
+                        <!-- Add more options as needed -->
+                    </select>
+                    <span asp-validation-for="Signed" class="text-danger"></span>
+                </div>
+            </div>
+            <!-- Filtering -->
+            <div class="form-group">
+                <label asp-for="Filtering" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <input asp-for="Filtering" type="text" class="form-control custominput ltr"  />
+                    <span asp-validation-for="Filtering" class="text-danger"></span>
+                </div>
+            </div>
+            <!-- Grouping -->
+            <div class="form-group">
+                <label asp-for="Grouping" class="control-label col-md-3 col-xs-12"></label>
+                <div>
+                    <input asp-for="Grouping" type="text" class="form-control custominput ltr"  />
+                    <span asp-validation-for="Grouping" class="text-danger"></span>
+                </div>
+            </div>
+         
             <!-- Submit Button -->
             <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">

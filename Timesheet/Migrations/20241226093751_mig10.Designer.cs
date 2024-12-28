@@ -12,8 +12,8 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241204073311_mig-11")]
-    partial class mig11
+    [Migration("20241226093751_mig10")]
+    partial class mig10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,6 +143,19 @@ namespace Timesheet.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Timesheet.Models.Entities.Admin.Counter_Table", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.HasKey("id");
+
+                    b.ToTable("Counter_Table");
+                });
+
             modelBuilder.Entity("Timesheet.Models.Entities.Admin.Position", b =>
                 {
                     b.Property<int>("Id")
@@ -151,16 +164,13 @@ namespace Timesheet.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Counter")
-                        .HasColumnType("int");
-
                     b.Property<string>("Filtering")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grouping")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Order")
+                    b.Property<int>("PositionCode")
                         .HasColumnType("int");
 
                     b.Property<string>("PositionName")
@@ -217,12 +227,14 @@ namespace Timesheet.Migrations
                         new
                         {
                             Id = "1",
-                            Name = "Admin"
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            Name = "User"
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -246,11 +258,10 @@ namespace Timesheet.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Family")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("IsAdmin")
-                        .HasColumnType("tinyint");
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -259,7 +270,6 @@ namespace Timesheet.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -275,6 +285,9 @@ namespace Timesheet.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonelCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -310,17 +323,17 @@ namespace Timesheet.Migrations
                         {
                             Id = "admin-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0fb481f-5a8d-42b6-a8a3-94519ce7cda2",
+                            ConcurrencyStamp = "49959b08-713b-4b6e-a429-eca6fe6529ce",
                             EmailConfirmed = false,
                             Family = "AdminFamily",
-                            IsAdmin = (byte)1,
+                            IsAdmin = true,
                             LockoutEnabled = false,
                             Name = "AdminName",
                             NormalizedUserName = "ADMIN",
                             Password = "Admin@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAwvR+sWLtxEdXfDaTO+G9ThEk2kFwjiExBEw9BLKgbKy8GevH7fXSSFEzVOdspYYw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDKlNjSBXU+drw//LxhmFT5E4iZqlW+gaaXxZBHZmzff2GHuGc18Dr13Rs63tIyhPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "627b2371-3a15-40b1-943c-0f3e2da62fc5",
+                            SecurityStamp = "765af3ce-3b9f-49e6-a0bd-593a61cb9baf",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -328,17 +341,17 @@ namespace Timesheet.Migrations
                         {
                             Id = "normal-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5e9659d8-cfd5-43f3-86c3-b757dfb4fcfe",
+                            ConcurrencyStamp = "80ebf3aa-c82a-4fa0-8dfa-cdc88cddd89c",
                             EmailConfirmed = false,
                             Family = "UserFamily",
-                            IsAdmin = (byte)0,
+                            IsAdmin = false,
                             LockoutEnabled = false,
                             Name = "UserName",
                             NormalizedUserName = "USER",
                             Password = "User@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAECQfBJbgmZkZ3pZ3LjKn3eNvqpjUXaz/+aI/SPhSJOmIx53mnQFbUiK6qmQRNt6Nyw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGsSIs2zym5yYcAp3FTemJ4AV/2x7jvTD9fH8N1p4SNcuBs1Y8sfGmt8+7cSvimPTw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1354825-2b58-46f9-8b9b-792fb7ae2063",
+                            SecurityStamp = "caa29b0b-5f77-44a2-8199-3f69b727f727",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         });
@@ -351,6 +364,9 @@ namespace Timesheet.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("autoNumber"));
+
+                    b.Property<bool>("BusDpt")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Ceo")
                         .HasColumnType("bit");

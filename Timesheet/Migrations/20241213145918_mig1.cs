@@ -32,10 +32,11 @@ namespace Timesheet.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Family = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Family = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsAdmin = table.Column<byte>(type: "tinyint", nullable: false),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    PositionId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -54,6 +55,99 @@ namespace Timesheet.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Position",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PositionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PositionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Family = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Filtering = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Grouping = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Order = table.Column<int>(type: "int", nullable: true),
+                    Counter = table.Column<int>(type: "int", nullable: true),
+                    Signed = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Position", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Timesheet",
+                columns: table => new
+                {
+                    autoNumber = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    persCode = table.Column<int>(type: "int", nullable: false),
+                    fName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    lName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    domainName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    userName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    date = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    discipline = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    prjCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    prjName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    phase = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    docCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    docName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    pPercent = table.Column<int>(type: "int", nullable: true),
+                    missionM = table.Column<int>(type: "int", nullable: true),
+                    homeWorkM = table.Column<int>(type: "int", nullable: true),
+                    extraWork = table.Column<int>(type: "int", nullable: true),
+                    vacationM = table.Column<int>(type: "int", nullable: true),
+                    vacationPayM = table.Column<int>(type: "int", nullable: true),
+                    delayPercM = table.Column<int>(type: "int", nullable: true),
+                    iExitM = table.Column<int>(type: "int", nullable: true),
+                    absenceM = table.Column<int>(type: "int", nullable: true),
+                    overTimeM = table.Column<int>(type: "int", nullable: true),
+                    dMWork = table.Column<float>(type: "real", nullable: true),
+                    tMWork = table.Column<int>(type: "int", nullable: true),
+                    timeSheetMWork = table.Column<int>(type: "int", nullable: true),
+                    interTime = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
+                    exitTime = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true),
+                    dayOfWeek = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    extraMissionM = table.Column<int>(type: "int", nullable: true),
+                    sumM_tMWork_extraWork_extraMission_homeWork_extraWorkFraction = table.Column<int>(type: "int", nullable: true),
+                    flag = table.Column<int>(type: "int", nullable: true),
+                    dailyPercent = table.Column<int>(type: "int", nullable: true),
+                    extraWorkFraction = table.Column<int>(type: "int", nullable: true),
+                    fNamePersian = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    lNamePersian = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    description1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    description2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    personnelDepartment = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    monthlyDue = table.Column<int>(type: "int", nullable: true),
+                    overtimeLimitM = table.Column<int>(type: "int", nullable: true),
+                    extraWorkLimitM = table.Column<int>(type: "int", nullable: true),
+                    paymentLimitM = table.Column<int>(type: "int", nullable: true),
+                    contractType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    company = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    inMissionM = table.Column<int>(type: "int", nullable: true),
+                    month = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    year = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
+                    period = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: true),
+                    holiday = table.Column<int>(type: "int", nullable: true),
+                    DepHead = table.Column<bool>(type: "bit", nullable: false),
+                    PrjHead = table.Column<bool>(type: "bit", nullable: false),
+                    EngHead = table.Column<bool>(type: "bit", nullable: false),
+                    GasDpt = table.Column<bool>(type: "bit", nullable: false),
+                    SupDpt = table.Column<bool>(type: "bit", nullable: false),
+                    WtrDpt = table.Column<bool>(type: "bit", nullable: false),
+                    Ceo = table.Column<bool>(type: "bit", nullable: false),
+                    NotAccept = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Timesheet", x => x.autoNumber);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,11 +267,11 @@ namespace Timesheet.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Family", "IsAdmin", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Family", "IsAdmin", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PositionId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "admin-user-id", 0, "b4ca62bd-3c1d-4e23-82c5-8dec2ce742a7", null, false, "AdminFamily", (byte)1, false, null, "AdminName", null, null, "Admin@123", "AQAAAAIAAYagAAAAENdXSJIsbtKKCxuAoP3OvrFnx9rMie5GnOeU6lOKa6EWX8bE4i0hfHuCvwjYZe/5nw==", null, false, "ded867d2-31f4-41e0-b7ee-9c033a108c54", false, "admin" },
-                    { "normal-user-id", 0, "729b3371-379d-4c27-8eb3-a63eb29c19bb", null, false, "UserFamily", (byte)0, false, null, "UserName", null, null, "User@123", "AQAAAAIAAYagAAAAEClHN9q3lXDspBSeuYlJvY6doweB6m8/itkZin2Ye1XiB9VrCBTsJkAnKowRXGa+dg==", null, false, "d71ec27f-35b8-4eef-ae26-f0c26a542afc", false, "user" }
+                    { "admin-user-id", 0, "eaca700b-b29f-4344-9072-b09c76bc6dd2", null, false, "AdminFamily", true, false, null, "AdminName", null, "ADMIN", "Admin@123", "AQAAAAIAAYagAAAAELrUgbEXh9fwL9Dm/Q3DVge3nLmNPl3bgbewvfRYiem5eHRy5ap2t0p/7gBesQgk9g==", null, false, null, "e131a6b9-73d9-4cda-8da5-a8be48556de7", false, "admin" },
+                    { "normal-user-id", 0, "f9e71b08-7deb-47e8-99b6-1a720311a2aa", null, false, "UserFamily", false, false, null, "UserName", null, "USER", "User@123", "AQAAAAIAAYagAAAAEIVOWRA7FsQTcb30NKLcdVdFrYT9D0I8Py1l2+Tcpqj5kuzC6e4lQMXdp1AH/rnEKA==", null, false, null, "86c3b249-4ad1-49cd-95ae-e3508ca8a39b", false, "user" }
                 });
 
             migrationBuilder.InsertData(
@@ -246,6 +340,12 @@ namespace Timesheet.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Position");
+
+            migrationBuilder.DropTable(
+                name: "Timesheet");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

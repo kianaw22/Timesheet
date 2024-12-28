@@ -17,6 +17,9 @@ namespace Timesheet.Models.ViewModels.Admin
 
         [Display(Name = "نام سمت")]
         public string PositionName { get; set; }
+        [Display(Name = "کد سمت")]
+        public string PositionCode { get; set; }
+
 
         [Display(Name = "فرمول فیلتر")]
         public string? Filtering { get; set; }
@@ -25,7 +28,7 @@ namespace Timesheet.Models.ViewModels.Admin
         public string? Grouping { get; set; }
 
 
-        [Display(Name = "ترتیب")]
-        public int? Order { get; set; }
+        [Display(Name = "امضا شده")]
+        public bool? Signed { get; set; }
     }
 }

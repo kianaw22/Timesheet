@@ -14,6 +14,7 @@ namespace Timesheet.Data
         public DbSet<Position> Position { get; set; }
 
         public DbSet<Models.Entities.User.Timesheet> Timesheet { get; set; }
+       public DbSet<Counter_Table> Counter_Table { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -26,11 +27,13 @@ namespace Timesheet.Data
                     new ApplicationRole
                     {
                         Id = "1",
+                        NormalizedName = "ADMIN",
                         Name = "Admin",
                     },
                     new ApplicationRole
                     {
                         Id = "2",
+                        NormalizedName = "USER",
                         Name = "User",
                     }
                 );
@@ -45,7 +48,7 @@ namespace Timesheet.Data
                 Family = "AdminFamily",
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                IsAdmin = 1,
+                IsAdmin = true,
                 Password = "Admin@123" // Store plain password for reference (testing only)
             };
             adminUser.PasswordHash = hasher.HashPassword(adminUser, adminUser.Password);
@@ -57,8 +60,8 @@ namespace Timesheet.Data
                 NormalizedUserName = "USER",
                 Name = "UserName",
                 Family = "UserFamily",
-                IsAdmin = 0,
-                Password = "User@123" 
+                IsAdmin = false,
+                Password = "User@123"
             };
             normalUser.PasswordHash = hasher.HashPassword(normalUser, normalUser.Password);
 

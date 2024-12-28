@@ -59,3 +59,33 @@
 .bootstrap-select.btn-group .btn .filter-option {
     text-align: left;
 }
+.k-switch .k-state-checked.k-switch-handle {
+    background-color: green !important;
+}
+
+/* When the switch is in the "on" state, change the border color */
+.k-switch .k-state-checked {
+    border-color: green !important;
+}
+
+/* Customize the "off" state (optional) */
+.k-switch .k-switch-handle {
+    background-color: #ccc !important; /* Default color for "off" state */
+}
+.k-switch-on .k-switch-handle {
+    background-color: lawngreen !important;
+    border-color: black !important;
+}
+
+.k-switch-on:hover .k-switch-handle {
+    background-color: lawngreen !important;
+    border-color: black !important;
+}
+
+.k-switch-on .k-switch-container {
+    color: black !important;
+  
+}
+k-rtl.k-switch.k-switch-on.k-switch-handle,.k-switch[dir=rtl].k-switch-on.k-switch-handle {
+    background-color: black !important;
+}

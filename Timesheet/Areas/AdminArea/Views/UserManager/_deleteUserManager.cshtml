@@ -1,0 +1,18 @@
+﻿@model Timesheet.Models.Entities.ApplicationUser
+
+<div class="modal-header">
+    <h5 class="modal-title">تایید حذف مورد</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    آیا از حذف  <strong>@Model.UserName</strong> مطمئن هستید؟
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">بازگشت</button>
+    <form method="post" asp-action="DeleteUserManagerPost" asp-controller="UserManager">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">حذف</button>
+    </form>
+</div>
