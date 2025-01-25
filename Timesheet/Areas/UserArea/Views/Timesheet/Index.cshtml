@@ -5,7 +5,13 @@
 }
 
 
-
+<style>
+    .disabled-button {
+        cursor: not-allowed !important;
+        opacity: 0.6 !important; 
+        pointer-events: none; 
+    }
+</style>
 
 <div class="content">
 
@@ -28,7 +34,7 @@
             <div id="grid"></div>
         </div>
         <div class="button-container" style="margin-top: 20px;">
-            <button id="approveSignButton" class="k-button customGreen1">تایید و امضا</button>
+            <button id="approveSignButton" class="k-button customGreen1"  title="">تایید و امضا</button>
         </div>
     </div>
 </div>
@@ -87,7 +93,12 @@
                     }
                 });
 
-                $("#approveSignButton").prop("disabled", true);
+                var button = $("#approveSignButton");
+                button.prop("disabled", true); 
+                button.attr("title", "قبلا تایید و امضا شده است"); 
+                button.css("cursor","not-allowed");
+               // button.addClass("disabled-button"); 
+
             }
             $("#grid").kendoGrid({
                 dataSource: {
@@ -101,7 +112,7 @@
                     },
                     pageSize: 1000,
                     groupPaging: true,
-                    group: groupingData, // Your grouping data
+                    group: groupingData,
                     aggregate: [{ field: "extraWork", aggregate: "sum" }]
                 },
                 height: 550,
@@ -116,26 +127,27 @@
                 columns: [
                     { field: "autoNumber", title: "Auto Number", width: "200px" },
                     { field: "persCode", title: "Personel Code", width: "200px" },
-                    { field: "fName", title: "First Name", width: "150px" },
-                    { field: "lName", title: "Last Name", width: "150px" },
+                    { field: "fNamePersian", title: "First Name", width: "150px" },
+                    { field: "lNamePersian", title: "Last Name", width: "150px" },
                     { field: "date", title: "Date", width: "120px" },
                     { field: "discipline", title: "Discipline", width: "150px" },
                     { field: "prjCode", title: "Project Code", width: "150px" },
                     { field: "phase", title: "Phase", width: "150px" },
                     { field: "docName", title: "Document Name", width: "300px" },
                     { field: "pPercent", title: "Percent", width: "100px" },
+                    { field: "NotAccept", title: "Not Accept By", width: "150px" },
                     {
-                        field: "extraWork",
-                        title: "Extra Work",
+                        field: "timeSheetMWork",
+                        title: "Work",
                         width: "150px",
                         template: function (dataItem) {
-                            var totalMinutes = dataItem.extraWork || 0;
+                            var totalMinutes = dataItem.timeSheetMWork || 0;
                             var hours = Math.floor(totalMinutes / 60);
                             var minutes = totalMinutes % 60;
                             return `${hours}:${minutes.toString().padStart(2, '0')}`;
                         },
                         groupHeaderColumnTemplate: function (e) {
-                            var totalMinutes = e.aggregates.extraWork.sum || 0;
+                            var totalMinutes = e.aggregates.timeSheetMWork.sum || 0;
                             var hours = Math.floor(totalMinutes / 60);
                             var minutes = totalMinutes % 60;
                             return `Total EW: ${hours}:${minutes.toString().padStart(2, '0')}`;
@@ -153,14 +165,18 @@
                         }
                         
                     },
-                    {
-                        width: "150px",
-                        command: [
-                            
-                                
-                            
-                        ]
-                    }
+                    { field: "DepHead", title: "مدیر بخش", width: "200px" },
+                    { field: "EngHead", title: "مدیر مهندسی", width: "200px" },
+                    { field: "PrjHead", title: "مدیر پروژه", width: "200px" },
+                    { field: "SupDpt", title: "معاونت پشتیبانی", width: "200px" },
+                    { field: "WtrDpt", title: "معاونت آب و انرژی", width: "200px" },
+                    { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
+                      { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
+                    { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
+                    { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
+                    { field: "BusDpt", title: "معاونت توسعه کسب و کار", width: "200px" },
+                    
+                    
                 ],
                 dataBound: function (e) {
                     var grid = e.sender;

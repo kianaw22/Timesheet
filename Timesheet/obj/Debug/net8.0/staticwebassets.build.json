@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gSsdKDxHtjqJaHQiLl54240tf4Wz7gyJv31+06PqVhI=",
+  "Hash": "UaFUoFxtCfy5Q+8VxPVkHaMXshZbNnwc4oCWSLkeUDY=",
   "Source": "Timesheet",
   "BasePath": "_content/Timesheet",
   "Mode": "Default",
@@ -18466,12 +18466,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\favicon.png",
       "SourceId": "Timesheet",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\",
       "BasePath": "_content/Timesheet",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "favicon.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -18482,7 +18482,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
       "Identity": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\js\\site.js",

@@ -45,7 +45,7 @@ namespace Timesheet.Controllers
 
             if (result.Succeeded)
             {
-                
+
                 if (user != null)
                 {
                     // Check the user's role

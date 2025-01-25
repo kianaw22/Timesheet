@@ -6,7 +6,20 @@
     var UsersList = ViewBag.user;
 }
 
+<style>
+    body {
+        direction: ltr !important;
+        text-align: left !important;
+    }
 
+    .form-group label {
+        text-align: left;
+    }
+
+    .btn {
+        float: right;
+    }
+</style>
 
 <div class="panel panel-body container-fluid" style="border-radius: 2px; box-shadow: 3px 1px 1px 0 gray; background-color: #e6e2e2;">
     <form asp-controller="Position" asp-action="AddPosition" method="post">
@@ -47,6 +60,8 @@
                         <option value="مدیر عامل" data-code="5">مدیر عامل</option>
                         <option value="معاونت مهندسی" data-code="2">معاونت مهندسی</option>
                         <option value="معاونت توسعه کسب و کار" data-code="4">معاونت توسعه کسب و کار</option>
+                        <option value="امور حقوقی و قراردادها" data-code="2">امور حقوقی و قراردادها</option>
+                        <option value="کنترل پروژه" data-code="2">کنترل پروژه</option>
                         <!-- Add more options as needed -->
                     </select>
                     <span asp-validation-for="PositionType" class="text-danger"></span>

@@ -51,7 +51,7 @@ namespace Timesheet.Areas.UserArea.Controllers
                         dir = parts.Length > 1 ? parts[1].ToLower() : "asc",
                         aggregates = new List<object> 
                         {
-                            new { field ="extraWork", aggregate = "sum" }, 
+                            new { field ="timeSheetMWork", aggregate = "sum" }, 
                        
                         }
                     };
@@ -59,14 +59,31 @@ namespace Timesheet.Areas.UserArea.Controllers
 
                 filteringFormula = filteringFormula?.Replace("\\\"", "\"");
                 List<Models.Entities.User.Timesheet> filteredTimesheet = [];
-                if (string.IsNullOrEmpty(filteringFormula))
+                var position = GetField();
+
+                if ( position=="Ceo")
                 {
                     filteredTimesheet = _context.Timesheet.ToList();
                 }
                 else
                 {
+                    IQueryable<Models.Entities.User.Timesheet> filter;
+                    if ( string.IsNullOrEmpty(filteringFormula))
+                    {
+                        filter = _context.Timesheet;
+                    }
+                    else
+                    {
+                         filter = _context.Timesheet.Where(filteringFormula);
 
-                    filteredTimesheet = _context.Timesheet.Where(filteringFormula).ToList();
+                    }
+                    
+                    if (position=="PrjHead" || position == "WtrDpt" || position == "GasDpt" ||position == "BusDpt"|| position == "SupDpt")
+                    {
+                        filter = filter.Where(a => a.NotAccept == null);
+                        
+                    }
+                    filteredTimesheet = filter.ToList();
 
                 }
                
@@ -161,7 +178,13 @@ namespace Timesheet.Areas.UserArea.Controllers
         {
             var counter = GetCounter();
             string field="";
-            if (counter == 1) { field = "DepHead"; }
+            if (counter == 1) 
+            {
+                var position = GetCurrentPosition();
+                if (position=="مدیر بخش") field = "DepHead";
+                else if (position == "امور حقوقی و قراردادها") { field = "Contract"; }
+                else if (position == "کنترل پروژه") { field = "PrjControl"; }
+            }
             else if (counter == 2) { field = "EngHead"; }
             else if (counter == 3) { field = "PrjHead"; }
             else if (counter == 4)
@@ -171,7 +194,10 @@ namespace Timesheet.Areas.UserArea.Controllers
                 else if (position == "معاونت آب و انرژی") { field = "WtrDpt"; }
                 else if (position == "معاونت پشتیبانی") { field = "SupDpt";  }
                 else if (position == "معاونت توسعه کسب و کار") { field = "BusDpt";  }
-               
+                else if (position == "امور حقوقی و قراردادها") { field = "Contract"; }
+                else if (position == "کنترل پروژه") { field = "PrjControl"; }
+
+
             }
             else if (counter == 5) { field = "Ceo"; }
             return field;
@@ -193,6 +219,52 @@ namespace Timesheet.Areas.UserArea.Controllers
                 if (property != null)
                 { 
                     property.SetValue(timesheetrow, newValue);
+                    if (field == "DepHead" )
+                    {
+                        if (newValue == false)
+                        {
+                            timesheetrow.EngHead = false;
+                            timesheetrow.NotAccept = $"not accept by {field}";
+                        }
+                        else
+                        {
+                            timesheetrow.EngHead = true;
+                            timesheetrow.NotAccept =null;
+                        }
+                      
+                    }
+                    else if  (field == "EngHead" || field == "PrjControl" || field == "Contract")
+                    {
+                        if (newValue == false)
+                        {
+                            if (timesheetrow.DepHead == false )
+                            {
+                                timesheetrow.NotAccept = $"not accept by {field} and PrjHead";
+                            }
+                            else
+                            {
+                                timesheetrow.NotAccept = $"not accept by {field}";
+                            }
+                            
+                        }
+                        else
+                        {
+                           
+                            timesheetrow.NotAccept = null;
+                        }
+
+                    }
+                    else
+                    {
+                        if (newValue == false)
+                        {
+                            timesheetrow.NotAccept = $"not accept by {field}";
+                        }
+                        else
+                        {
+                            timesheetrow.NotAccept = null;
+                        }
+                    }
                     _context.SaveChanges();
                     return Ok();
                 }

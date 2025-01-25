@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Timesheet.Models.ViewModels.User.KarkardViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">'کارکرد'</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="background-color: lightgray ;box-shadow:3px 1px 1px 0 grey; border-radius:2px; margin-bottom: 5px">
+        <span style="font-weight:bold;">
+
+            لیست کارکرد
+        </span>
+    </div>
+
+    <div>
+        <div class="k-rtl">
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Serialize Model data and parse it as JSON
+            var myobj = '@Html.Raw(Json.Serialize(Model))';
+            var jsondata = JSON.parse(myobj);
+
+            // Make the function globally accessible
+            window.formatMinutesToTime = function (minutes) {
+                var hours = Math.floor(minutes / 60);
+                var mins = minutes % 60;
+                return hours + ":" + (mins < 10 ? "0" + mins : mins);
+            };
+
+            // Initialize Kendo Grid
+            $("#grid").kendoGrid({
+                dataSource: {
+                    group: [{ field: "department" }],
+                    data: jsondata,
+                    pageSize: jsondata.length // Customize page size
+                },
+                height: 550,
+                filterable: true,
+                groupable: true,
+                sortable: true,
+                toolbar: ["pdf", "search", "excel"],
+                pageable: {
+                    refresh: true,
+                    pageSizes: [10, 20, 50],
+                    buttonCount: 5
+                },
+                columns: [
+                    { field: "personelCode", width: 150, title: "Personnel Code" },
+                    { field: "name", width: 150, title: "First Name" },
+                    { field: "family", width: 150, title: "Last Name" },
+                    { field: "entryExitWork", width: 150, title: "Work Hours", template: "#= window.formatMinutesToTime(entryExitWork) #" },
+                    { field: "extraWork", width: 150, title: "Extra Work Hours", template: "#= window.formatMinutesToTime(extraWork) #" },
+                    { field: "delay", width: 150, title: "Delay", template: "#= window.formatMinutesToTime(delay) #" },
+                    { field: "absence", width: 150, title: "Absence", template: "#= window.formatMinutesToTime(absence) #" },
+                    { field: "workAtHome", width: 150, title: "Work At Home", template: "#= window.formatMinutesToTime(workAtHome) #" },
+                    { field: "tMwork", width: 150, title: "tm work", template: "#= window.formatMinutesToTime(tMwork) #" },
+                    { field: "timesheetWork", width: 150, title: "TimeSheetwork", template: "#= window.formatMinutesToTime(timesheetWork) #" },
+                    { field: "notFilledTimeSheet", width: 250, title: "Unfilled Timesheets", template: "#= window.formatMinutesToTime(notFilledTimeSheet) #" },
+                ]
+            });
+        });
+
+    </script>
+}

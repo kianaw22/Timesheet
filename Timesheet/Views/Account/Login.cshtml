@@ -1,38 +1,64 @@
 ﻿@model Timesheet.Models.ViewModels.LoginViewModel
 
 @{
-   
     ViewData["Title"] = "Login";
 }
 
+<!-- Add a background style for the entire page -->
+<style>
+    body {
+        background-color: cornflowerblue; /* Light gray background */
+        /* Alternatively, use an image as background */
+        /* background-image: url('path/to/your/image.jpg'); */
+        background-size: cover;
+        background-position: center;
+    }
 
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-<form asp-action="Login" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+    }
 
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
+    .login-btn {
+        width: 100%; /* Makes the button take the full width of the card */
+    }
+</style>
+
+<!-- Container to center the login form on the page -->
+<div class="container-fluid login-container">
+    <div class="card shadow-lg login-card">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Timesheet Login</h3>
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group">
+                    <label asp-for="Username" class="font-weight-bold">Username</label>
+                    <input asp-for="Username" class="form-control" placeholder="Enter your username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="font-weight-bold">Password</label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <!-- Centered Login Button -->
+                <button type="submit" class="btn btn-primary login-btn mt-4">Login</button>
+            </form>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-   
-
-  
-    <button type="submit" class="btn btn-primary">Login</button>
-
-    <div id="grid"></div>
-</form>
+</div>
 
 @section Scripts {
-
-  
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

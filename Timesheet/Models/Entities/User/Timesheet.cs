@@ -141,7 +141,10 @@ namespace Timesheet.Models.Entities.User
         public bool SupDpt { get; set; }
         public bool WtrDpt { get; set; }
         public bool Ceo { get; set; }
+        public bool Contract { get; set; }
+        public bool PrjControl { get; set; }
         public string? NotAccept { get; set; }
+        public string? PersonelCode { get; set; }
 
     }
 

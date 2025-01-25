@@ -3881,8 +3881,8 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
     },
     {
       "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\js\\site.js",

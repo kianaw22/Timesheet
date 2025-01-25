@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Timesheet.Data;
 
@@ -11,9 +12,11 @@ using Timesheet.Data;
 namespace Timesheet.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241230175112_mig12")]
+    partial class mig12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,7 +326,7 @@ namespace Timesheet.Migrations
                         {
                             Id = "admin-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "758bb984-ab9f-451f-b1ee-9733fb45aaf8",
+                            ConcurrencyStamp = "3545ff75-6b2e-431b-97d5-6530e6740d15",
                             EmailConfirmed = false,
                             Family = "AdminFamily",
                             IsAdmin = true,
@@ -331,9 +334,9 @@ namespace Timesheet.Migrations
                             Name = "AdminName",
                             NormalizedUserName = "ADMIN",
                             Password = "Admin@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMegz6A4cM/ygRf7r5tKpR8nngpIpg/HL+VKZjgC7doBWKONll4qSGgr0qL6VX9p5Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKEvl59PIfhW8ihsZUzxoWo9yHipcOJiJ3ANvKzNtmFO0DkK7hbl3VBH76Pruh/kaA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9d61736e-40c9-42a0-be4b-071740a996d2",
+                            SecurityStamp = "bdaf0fb0-44c7-405b-93a6-eb806600c94d",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -341,7 +344,7 @@ namespace Timesheet.Migrations
                         {
                             Id = "normal-user-id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dd7fe134-1300-47c4-b373-470aed83d6d6",
+                            ConcurrencyStamp = "01d78148-3a7d-41a6-9b47-c221c7e87935",
                             EmailConfirmed = false,
                             Family = "UserFamily",
                             IsAdmin = false,
@@ -349,9 +352,9 @@ namespace Timesheet.Migrations
                             Name = "UserName",
                             NormalizedUserName = "USER",
                             Password = "User@123",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIB+cCkGTEjN+Ggv3WbtvNqnhTYovr6SMlqY6YAmMBToVJegoYk9EggV5Nfc5cmMyQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAueb0xYphgWjFVISM6xttqqlqel1uRfijCs3086o1CFci7grWacQf585Is/7scS5g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dc03a6ca-2fa3-438c-95a0-29dd1fb9a599",
+                            SecurityStamp = "3ca62b0d-4689-4753-b082-daf48a6f04b6",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         });
@@ -384,9 +387,6 @@ namespace Timesheet.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NotAccept")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonelCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PrjControl")
