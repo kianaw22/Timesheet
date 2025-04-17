@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Timesheet.Models.Entities;
 using Timesheet.Models.Entities.Admin;
+using Timesheet.Models.Entities.User;
 
 namespace Timesheet.Data
 {
@@ -15,6 +16,7 @@ namespace Timesheet.Data
 
         public DbSet<Models.Entities.User.Timesheet> Timesheet { get; set; }
        public DbSet<Counter_Table> Counter_Table { get; set; }
+        public DbSet<Date> Date { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

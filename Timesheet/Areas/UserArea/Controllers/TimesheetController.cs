@@ -7,6 +7,9 @@ using System.Linq.Dynamic.Core;
 using System.Security.Claims;
 using System.Diagnostics.Metrics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using Newtonsoft.Json.Serialization;
 
 namespace Timesheet.Areas.UserArea.Controllers
 {
@@ -34,9 +37,14 @@ namespace Timesheet.Areas.UserArea.Controllers
             var userposition = _context.Position.FirstOrDefault(p => p.UserId == userId && p.PositionCode == GetCounter());
             if (userposition == null )
             {
-                return NotFound("Position is not found for this user");
-            }   
-            
+                var maxCounter = _context.Position.Where(p => p.UserId == userId).Max(p => (int?)p.PositionCode) ?? 0;
+                if (maxCounter == 0){
+                    return NotFound("No position found for this user");
+                }
+                userposition = _context.Position.FirstOrDefault(p => p.UserId == userId && p.PositionCode == maxCounter);
+
+            }
+
             var filteringFormula = userposition.Filtering;
             var groupingFormula = userposition.Grouping;
             var signed = userposition.Signed;
@@ -51,7 +59,7 @@ namespace Timesheet.Areas.UserArea.Controllers
                         dir = parts.Length > 1 ? parts[1].ToLower() : "asc",
                         aggregates = new List<object> 
                         {
-                            new { field ="timeSheetMWork", aggregate = "sum" }, 
+                            new { field ="dMWork", aggregate = "sum" }, 
                        
                         }
                     };
@@ -63,18 +71,18 @@ namespace Timesheet.Areas.UserArea.Controllers
 
                 if ( position=="Ceo")
                 {
-                    filteredTimesheet = _context.Timesheet.ToList();
+                    filteredTimesheet = _context.Timesheet.Where(x => x.fName != "خالی").ToList();
                 }
                 else
                 {
                     IQueryable<Models.Entities.User.Timesheet> filter;
                     if ( string.IsNullOrEmpty(filteringFormula))
                     {
-                        filter = _context.Timesheet;
+                        filter = _context.Timesheet.Where(x => x.fName != "خالی");
                     }
                     else
                     {
-                         filter = _context.Timesheet.Where(filteringFormula);
+                         filter = _context.Timesheet.Where(x => x.fName != "خالی").Where(filteringFormula);
 
                     }
                     
@@ -86,11 +94,14 @@ namespace Timesheet.Areas.UserArea.Controllers
                     filteredTimesheet = filter.ToList();
 
                 }
-               
+
                 var jsonGrouping = JsonConvert.SerializeObject(groupingFields).Replace("\\", "\\\\");
+
                 var jsonData = JsonConvert.SerializeObject(filteredTimesheet).Replace("'", "").Replace("\\", "\\\\");
+          
                 ViewBag.JsonData = jsonData;
                 ViewBag.GroupingData = jsonGrouping;
+
                 ViewBag.Signed = signed;
                 ViewData["FieldToUse"] = GetField();
                 return View();
@@ -101,6 +112,44 @@ namespace Timesheet.Areas.UserArea.Controllers
                 return BadRequest($"Error applying filter: {ex.Message}");
             }
             
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateNotAccept([FromBody]  List<int> uncheckedRecords)
+        {
+            if (uncheckedRecords == null || uncheckedRecords.Count == 0)
+            {
+                return BadRequest(new { success = false, message = "No records received." });
+            }
+
+            try
+            {
+                var recordsToUpdate = _context.Timesheet
+                        .Where(t => uncheckedRecords.Contains((int)t.autoNumber))
+                        .ToList();
+
+                foreach (var record in recordsToUpdate)
+                {
+                    if (record.DepHead == false)
+                    {
+                        record.NotAccept += " and EngHead";
+                    }
+                    else
+                    {
+                        record.NotAccept = "not accept by EngHead"; // Update field
+                    }
+                 }
+
+                    _context.SaveChanges();
+                
+
+                return Ok(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = "Server error.", error = ex.Message });
+            }
         }
         [HttpPost]
         public JsonResult Sign()
@@ -113,12 +162,14 @@ namespace Timesheet.Areas.UserArea.Controllers
                     return Json(new { success = false, message = "User is not logged in." });
                 }
 
-                var position = _context.Position.FirstOrDefault(t => t.UserId == userId);
+                var position = _context.Position.FirstOrDefault(t => t.UserId == userId && t.PositionCode == GetCounter());
+                
 
                 if (position == null)
                 {
                     return Json(new { success = false, message = "No position found for the user." });
                 }
+
                 position.Signed = true;
                 _context.SaveChanges();
                 return Json(new { success = true });
@@ -134,7 +185,7 @@ namespace Timesheet.Areas.UserArea.Controllers
             try
             {
                 var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                var userposition = _context.Position.FirstOrDefault(p => p.UserId == userId);
+                var userposition = _context.Position.FirstOrDefault(p => p.UserId == userId && p.PositionCode == GetCounter());
                 bool signed = userposition?.Signed ?? false;
                 return Json(new { signed = signed });
             }
@@ -153,12 +204,27 @@ namespace Timesheet.Areas.UserArea.Controllers
             return position.PositionType;
 
         }
+        public string? GetMaxCounterPosition()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null) return null;
+            var maxCounter = _context.Position.Where(p => p.UserId == userId).Max(p => (int?)p.PositionCode) ?? 0;
+            var position = _context.Position.FirstOrDefault(p => p.UserId == userId && p.PositionCode == maxCounter);
+            if (position == null)
+            {
+                return null;
+            }
+            return position.PositionType ;
+        }
         [HttpGet]
         public JsonResult GetUserPosition()
         {
             try
             {
                 var position = GetCurrentPosition(); 
+                if (position == null){
+                    position = GetMaxCounterPosition();
+                }
                 return Json(new { position = position ?? "No Position" });
             }
             catch (Exception ex)
@@ -239,7 +305,7 @@ namespace Timesheet.Areas.UserArea.Controllers
                         {
                             if (timesheetrow.DepHead == false )
                             {
-                                timesheetrow.NotAccept = $"not accept by {field} and PrjHead";
+                                timesheetrow.NotAccept = $"not accept by {field} and DepHead";
                             }
                             else
                             {

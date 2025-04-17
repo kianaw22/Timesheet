@@ -1,5 +1,27 @@
-﻿@*
-    user PANEL
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var param1 = ViewData["Param1"];
+    var param2 = ViewData["Param2"];
 }
+
+<style>
+    .red-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 200px;
+        background-color: darkslategrey;
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 10px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+</style>
+
+<div class="red-box">
+  این بازه زمانی از تاریخ  @param1 تا @param2 می باشد
+</div>

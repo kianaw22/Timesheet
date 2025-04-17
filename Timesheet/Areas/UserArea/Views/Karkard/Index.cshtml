@@ -7,8 +7,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">خانه</a></li>
-            <li class="breadcrumb-item active" aria-current="page">'کارکرد'</li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","User")">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">کارکرد</li>
         </ol>
     </nav>
     <div class="panel panel-heading" style="background-color: lightgray ;box-shadow:3px 1px 1px 0 grey; border-radius:2px; margin-bottom: 5px">
@@ -57,17 +57,18 @@
                     buttonCount: 5
                 },
                 columns: [
-                    { field: "personelCode", width: 150, title: "Personnel Code" },
-                    { field: "name", width: 150, title: "First Name" },
-                    { field: "family", width: 150, title: "Last Name" },
-                    { field: "entryExitWork", width: 150, title: "Work Hours", template: "#= window.formatMinutesToTime(entryExitWork) #" },
-                    { field: "extraWork", width: 150, title: "Extra Work Hours", template: "#= window.formatMinutesToTime(extraWork) #" },
-                    { field: "delay", width: 150, title: "Delay", template: "#= window.formatMinutesToTime(delay) #" },
-                    { field: "absence", width: 150, title: "Absence", template: "#= window.formatMinutesToTime(absence) #" },
-                    { field: "workAtHome", width: 150, title: "Work At Home", template: "#= window.formatMinutesToTime(workAtHome) #" },
-                    { field: "tMwork", width: 150, title: "tm work", template: "#= window.formatMinutesToTime(tMwork) #" },
-                    { field: "timesheetWork", width: 150, title: "TimeSheetwork", template: "#= window.formatMinutesToTime(timesheetWork) #" },
-                    { field: "notFilledTimeSheet", width: 250, title: "Unfilled Timesheets", template: "#= window.formatMinutesToTime(notFilledTimeSheet) #" },
+                    { field: "personelCode", width: 150, title: "کد پرسنلی" },
+                    { field: "name", width: 150, title: "نام" },
+                    { field: "family", width: 150, title: "نام خانوادگی" },
+                   // { field: "tMwork", width: 150, title: "ساعات کارکرد کل", template: "#= window.formatMinutesToTime(tMwork) #" },
+                    { field: "entryExitWork", width: 200, title: "کارکرد بر اساس ورود و خروج", template: "#= window.formatMinutesToTime(entryExitWork) #" },
+                    { field: "extraWork", width: 150, title: "اضافه کار", template: "#= window.formatMinutesToTime(extraWork) #" },
+                    { field: "delay", width: 150, title: "تاخیر و تعجیل", template: "#= window.formatMinutesToTime(delay) #" },
+                    { field: "absence", width: 150, title: "غیبت", template: "#= window.formatMinutesToTime(absence) #" },
+                    { field: "workAtHome", width: 150, title: "کار در منزل", template: "#= window.formatMinutesToTime(workAtHome) #" },
+                    { field: "paidLeave", width: 150, title: "مرخصی با حقوق", template: "#= window.formatMinutesToTime(paidLeave) #" },
+                    { field: "timesheetWork", width: 150, title: "کارکرد تایم شیت", template: "#= window.formatMinutesToTime(timesheetWork) #" },
+                    { field: "notFilledTimeSheet", width: 250, title: "تایم شیت پر نشده", template: "#= window.formatMinutesToTime(notFilledTimeSheet) #" },
                 ]
             });
         });

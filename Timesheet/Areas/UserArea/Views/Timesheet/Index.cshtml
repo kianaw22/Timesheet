@@ -17,7 +17,7 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">خانه</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","User")">خانه</a></li>
             <li class="breadcrumb-item active" aria-current="page">تایم شیت</li>
         </ol>
     </nav>
@@ -39,16 +39,21 @@
     </div>
 </div>
 @section Scripts {
-   
-   <script>
-    var fieldToUse = "@ViewData["FieldToUse"]";
-    var jsonData = JSON.parse('@Html.Raw(ViewBag.JsonData)');
-    var groupingData = JSON.parse('@Html.Raw(ViewBag.GroupingData)' || "[]");
-    var signed = JSON.parse('@Html.Raw(ViewBag.Signed.ToString().ToLower())');
 
-    $(document).ready(function () {
-            
-        checkSignedStatus();
+    <script>
+
+        // دریافت رشته جیسون از ViewBag
+        var fieldToUse = "@ViewData["FieldToUse"]";
+        console.log(" field to use ", fieldToUse);
+        var jsonData = JSON.parse('@Html.Raw(ViewBag.JsonData)');
+        var groupingData = JSON.parse('@Html.Raw(ViewBag.GroupingData)' || "[]");
+        var signed = JSON.parse('@Html.Raw(ViewBag.Signed.ToString().ToLower())');
+        console.log(jsonData);
+
+        $(document).ready(function () {
+
+
+            checkSignedStatus();
             function checkSignedStatus() {
                 $.ajax({
                     url: "/UserArea/TimeSheet/GetSignedStatus",
@@ -67,6 +72,42 @@
             }
 
             $("#approveSignButton").click(function () {
+                if (fieldToUse == "EngHead") {
+                    var uncheckedRecords = [];
+                    uncheckedRecords = uncheckedRecords.map(Number);
+                    $(".k-switch input[type='checkbox']").each(function () {
+                        var switchElement = $(this);
+                        var isChecked = switchElement.prop("checked");
+                        var recordId = switchElement.attr("data-id"); // Get the correct data-id
+
+                        if (!isChecked) {
+                            uncheckedRecords.push(Number(recordId));
+                        }
+                    });
+
+
+                    if (uncheckedRecords.length > 0) {
+                        console.log("Unchecked Records:", uncheckedRecords); // Debugging
+                        $.ajax({
+                            url: "/UserArea/TimeSheet/UpdateNotAccept", // Your backend endpoint
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(uncheckedRecords),
+                            success: function (response) {
+                                if (response.success) {
+                                    console.log("Unchecked records updated!");
+
+                                } else {
+                                    console.log("Failed to update unchecked records.");
+                                }
+                            },
+                            error: function (xhr) {
+                                console.error("Error updating unchecked records:", xhr);
+
+                            }
+                        });
+                    }
+                }
                 $.ajax({
                     url: "/UserArea/TimeSheet/Sign",
                     method: "POST",
@@ -94,104 +135,97 @@
                 });
 
                 var button = $("#approveSignButton");
-                button.prop("disabled", true); 
-                button.attr("title", "قبلا تایید و امضا شده است"); 
-                button.css("cursor","not-allowed");
-               // button.addClass("disabled-button"); 
+                button.prop("disabled", true);
+                button.attr("title", "قبلا تایید و امضا شده است");
+                button.css("cursor", "not-allowed");
+                // button.addClass("disabled-button");
 
             }
-            $("#grid").kendoGrid({
-                dataSource: {
-                    data: jsonData,
-                    schema: {
-                        model: {
-                            fields: {
-                               
+           
+
+            // Add calculated field for group sum only
+           // jsonData.forEach(item => {
+           //     const work = item.timeSheetMWork || 0;
+           //     const percent = item.pPercent || 0;
+           //     item.effectiveWork = Math.round(work * percent / 100);  // used only in groupHeader
+               
+           // });
+
+
+                $("#grid").kendoGrid({
+                    dataSource: {
+                        data: jsonData,
+                        schema: {
+                            model: {
+                                fields: {
+                                dMWork: { type: "number" },
+                                    pPercent: { type: "number" },
+                                   // effectiveWork: { type: "number" }
+                                }
                             }
-                        }
-                    },
-                    pageSize: 1000,
-                    groupPaging: true,
-                    group: groupingData,
-                    aggregate: [{ field: "extraWork", aggregate: "sum" }]
-                },
-                height: 550,
-                pageable: {
-                    refresh: true,
-                    pageSizes: [5, 10, 100, 500, jsonData.length],
-                    buttonCount: 5
-                },
-                groupable: true,
-                sortable: true,
-                filterable: true,
-                columns: [
-                    { field: "autoNumber", title: "Auto Number", width: "200px" },
-                    { field: "persCode", title: "Personel Code", width: "200px" },
-                    { field: "fNamePersian", title: "First Name", width: "150px" },
-                    { field: "lNamePersian", title: "Last Name", width: "150px" },
-                    { field: "date", title: "Date", width: "120px" },
-                    { field: "discipline", title: "Discipline", width: "150px" },
-                    { field: "prjCode", title: "Project Code", width: "150px" },
-                    { field: "phase", title: "Phase", width: "150px" },
-                    { field: "docName", title: "Document Name", width: "300px" },
-                    { field: "pPercent", title: "Percent", width: "100px" },
-                    { field: "NotAccept", title: "Not Accept By", width: "150px" },
-                    {
-                        field: "timeSheetMWork",
-                        title: "Work",
-                        width: "150px",
-                        template: function (dataItem) {
-                            var totalMinutes = dataItem.timeSheetMWork || 0;
-                            var hours = Math.floor(totalMinutes / 60);
-                            var minutes = totalMinutes % 60;
-                            return `${hours}:${minutes.toString().padStart(2, '0')}`;
                         },
-                        groupHeaderColumnTemplate: function (e) {
-                            var totalMinutes = e.aggregates.timeSheetMWork.sum || 0;
-                            var hours = Math.floor(totalMinutes / 60);
-                            var minutes = totalMinutes % 60;
-                            return `Total EW: ${hours}:${minutes.toString().padStart(2, '0')}`;
+                        pageSize: 1000,
+                        groupPaging: true,
+                        group: groupingData,
+                        aggregate: [
+                        { field: "dMWork", aggregate: "sum" }  // used only in group header
+                        ]
+                    },
+                    height: 550,
+                    pageable: {
+                        refresh: true,
+                        pageSizes: [5, 10, 100, 500, jsonData.length],
+                        buttonCount: 5
+                    },
+                    groupable: true,
+                    sortable: true,
+                    filterable: true,
+                    toolbar: ["search"],
+                    columns: [
+                        { field: "autoNumber", title: "Auto Number", width: "200px" },
+                        { field: "persCode", title: "Personel Code", width: "200px" },
+                        { field: "fNamePersian", title: "First Name", width: "150px" },
+                        { field: "lNamePersian", title: "Last Name", width: "150px" },
+                        { field: "date", title: "Date", width: "120px" },
+                        { field: "discipline", title: "Discipline", width: "150px" },
+                        { field: "prjCode", title: "Project Code", width: "150px" },
+                        {
+                            field: "dMWork",
+                            title: "Work",
+                            width: "150px",
+                            aggregates: ["sum"],
+                            template: function (dataItem) {
+                            var totalMinutes = dataItem.dMWork || 0;
+                                var hours = Math.floor(totalMinutes / 60);
+                                var minutes = totalMinutes % 60;
+                                return `${hours}:${minutes.toString().padStart(2, '0')}`;
+                            },
+                            groupHeaderColumnTemplate: function (e) {
+                            var totalMinutes = e.aggregates.dMWork?.sum || 0;
+                                var hours = Math.floor(totalMinutes / 60);
+                                var minutes = totalMinutes % 60;
+                                
+                                return `Total: ${hours}:${minutes.toString().padStart(2, '0')}`;
+                            },
+                          
                         },
-                        aggregates: ["sum"]
-                    },
-                    {
-                        field: "Accept",
-                        title: "Accept",
-                        width: "150px",
-                        template: function (dataItem) {
-
-                            var isChecked = (dataItem[fieldToUse] === true);
-                            return `<input type="checkbox" class="k-switch" data-id="${dataItem.autoNumber}" ${isChecked ? "checked" : ""} />`;
-                        }
-                        
-                    },
-                    { field: "DepHead", title: "مدیر بخش", width: "200px" },
-                    { field: "EngHead", title: "مدیر مهندسی", width: "200px" },
-                    { field: "PrjHead", title: "مدیر پروژه", width: "200px" },
-                    { field: "SupDpt", title: "معاونت پشتیبانی", width: "200px" },
-                    { field: "WtrDpt", title: "معاونت آب و انرژی", width: "200px" },
-                    { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
-                      { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
-                    { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
-                    { field: "GasDpt", title: "معاونت نفت و گاز", width: "200px" },
-                    { field: "BusDpt", title: "معاونت توسعه کسب و کار", width: "200px" },
-                    
-                    
-                ],
-                dataBound: function (e) {
-                    var grid = e.sender;
-                    var groupRows = grid.tbody.find("tr.k-grouping-row");
-                    groupRows.each(function (index, groupRow) {
-                        grid.collapseGroup(groupRow); 
-                    });
-                    var outerGroups = groupRows.filter(function (index) {
-                        var groupLevel = $(this).closest("table").find("tr").index($(this));
-                        return groupLevel === 0; 
-                    });
-                    outerGroups.each(function () {
-                        grid.expandGroup($(this)); 
-                    });
-
+                        { field: "phase", title: "Phase", width: "150px" },
+                        { field: "docName", title: "Document Name", width: "300px" },
+                        { field: "pPercent", title: "Percent", width: "100px" },
+                        { field: "NotAccept", title: "Not Accept By", width: "150px" },
+                        {
+                            field: "Accept",
+                            title: "Accept",
+                            width: "150px",
+                            template: function (dataItem) {
+                                var isChecked = dataItem[fieldToUse] === true;
+                                return `<input type="checkbox" class="k-switch" data-id="${dataItem.autoNumber}" ${isChecked ? "checked" : ""} />`;
+                            }
+                        },
+                        { field: "DepHead", title: "مدیر بخش", width: "200px" },
+                        { field: "EngHead", title: "مدیر مهندسی", width: "200px" }
+                    ],
+                    dataBound: function () {
                     $(".k-switch").each(function () {
                         var switchElement = $(this);
 
@@ -199,18 +233,18 @@
                             switchElement.kendoSwitch({
                                 change: function (e) {
                                     //var row = e.sender.element.closest("tr");
-                                   // var grid = $("#grid").getKendoGrid();
-                                   // var dataItem = grid.dataItem(row);
-                                   // console.log(dataItem);
+                                    // var grid = $("#grid").getKendoGrid();
+                                    // var dataItem = grid.dataItem(row);
+                                    // console.log(dataItem);
                                     var dataItemId = switchElement.data("id");
-                                    var isChecked = e.sender.element.prop("checked"); 
+                                    var isChecked = e.sender.element.prop("checked");
                                     console.log(`${isChecked ? "Approve" : "Reject"} for Record ID: ${dataItemId}`);
                                     $.ajax({
-                                        url: "/UserArea/TimeSheet/UpdateField", 
+                                        url: "/UserArea/TimeSheet/UpdateField",
                                         method: "POST",
                                         data: {
                                             recordId: dataItemId,
-                                            newValue: isChecked ? true : false 
+                                            newValue: isChecked ? true : false
                                         },
                                         success: function (response) {
                                             console.log("Field updated successfully:", response);
@@ -224,17 +258,16 @@
                             });
                         }
                     });
+                    }
+                });
 
-                }
-            });
+                var grid = $("#grid").data("kendoGrid");
+                grid.hideColumn("autoNumber");
+                grid.hideColumn("persCode");
+                grid.hideColumn("discipline");
 
-
-
-        console.log("here");
-            
-
-    });
-</script>
+        });
+    </script>
 
 
 

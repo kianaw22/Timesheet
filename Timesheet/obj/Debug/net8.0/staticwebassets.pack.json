@@ -469,18 +469,6 @@
       "PackagePath": "staticwebassets\\AdminLTE\\dist\\js\\demo.js"
     },
     {
-      "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\AdminLTE\\dist\\js\\pages\\dashboard.js",
-      "PackagePath": "staticwebassets\\AdminLTE\\dist\\js\\pages\\dashboard.js"
-    },
-    {
-      "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\AdminLTE\\dist\\js\\pages\\dashboard2.js",
-      "PackagePath": "staticwebassets\\AdminLTE\\dist\\js\\pages\\dashboard2.js"
-    },
-    {
-      "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\AdminLTE\\dist\\js\\pages\\dashboard3.js",
-      "PackagePath": "staticwebassets\\AdminLTE\\dist\\js\\pages\\dashboard3.js"
-    },
-    {
       "Id": "C:\\Users\\Asus\\Desktop\\Timesheet\\Timesheet\\wwwroot\\AdminLTE\\dist\\js\\persian-date.min.js",
       "PackagePath": "staticwebassets\\AdminLTE\\dist\\js\\persian-date.min.js"
     },
