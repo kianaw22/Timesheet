@@ -78,7 +78,7 @@
                     $(".k-switch input[type='checkbox']").each(function () {
                         var switchElement = $(this);
                         var isChecked = switchElement.prop("checked");
-                        var recordId = switchElement.attr("data-id"); // Get the correct data-id
+                        var recordId = switchElement.attr("data-id"); 
 
                         if (!isChecked) {
                             uncheckedRecords.push(Number(recordId));
@@ -160,7 +160,7 @@
                                 fields: {
                                 dMWork: { type: "number" },
                                     pPercent: { type: "number" },
-                                   // effectiveWork: { type: "number" }
+                                   
                                 }
                             }
                         },
@@ -180,7 +180,7 @@
                     groupable: true,
                     sortable: true,
                     filterable: true,
-                    toolbar: ["search"],
+                    toolbar: ["search" , "excel"],
                     columns: [
                         { field: "autoNumber", title: "Auto Number", width: "200px" },
                         { field: "persCode", title: "Personel Code", width: "200px" },
@@ -232,13 +232,10 @@
                         if (!switchElement.data("kendoSwitch")) {
                             switchElement.kendoSwitch({
                                 change: function (e) {
-                                    //var row = e.sender.element.closest("tr");
-                                    // var grid = $("#grid").getKendoGrid();
-                                    // var dataItem = grid.dataItem(row);
-                                    // console.log(dataItem);
+                                    
                                     var dataItemId = switchElement.data("id");
                                     var isChecked = e.sender.element.prop("checked");
-                                    console.log(`${isChecked ? "Approve" : "Reject"} for Record ID: ${dataItemId}`);
+                                  //  console.log(`${isChecked ? "Approve" : "Reject"} for Record ID: ${dataItemId}`);
                                     $.ajax({
                                         url: "/UserArea/TimeSheet/UpdateField",
                                         method: "POST",
