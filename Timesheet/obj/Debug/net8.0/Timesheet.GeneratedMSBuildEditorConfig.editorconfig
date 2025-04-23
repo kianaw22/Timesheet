@@ -17,119 +17,119 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Timesheet
 build_property.RootNamespace = Timesheet
-build_property.ProjectDir = C:\Users\Asus\Desktop\Timesheet\Timesheet\
+build_property.ProjectDir = C:\Users\Asus\Desktop\DP\Timesheet\Timesheet\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Asus\Desktop\Timesheet\Timesheet
+build_property.MSBuildProjectDirectory = C:\Users\Asus\Desktop\DP\Timesheet\Timesheet
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Admin/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXEFkbWluXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Position/AddPosition.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/Position/AddPosition.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFBvc2l0aW9uXEFkZFBvc2l0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Position/EditPosition.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/Position/EditPosition.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFBvc2l0aW9uXEVkaXRQb3NpdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Position/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/Position/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFBvc2l0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Position/_deletePosition.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/Position/_deletePosition.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFBvc2l0aW9uXF9kZWxldGVQb3NpdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/Shared/_Layout.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/AddUserManager.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/AddUserManager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFVzZXJNYW5hZ2VyXEFkZFVzZXJNYW5hZ2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/EditUserManager.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/EditUserManager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFVzZXJNYW5hZ2VyXEVkaXRVc2VyTWFuYWdlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFVzZXJNYW5hZ2VyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/_deleteUserManager.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/UserManager/_deleteUserManager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXFVzZXJNYW5hZ2VyXF9kZWxldGVVc2VyTWFuYWdlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/_ViewImports.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/AdminArea/Views/_ViewStart.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/AdminArea/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5BcmVhXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/UserArea/Views/Karkard/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/UserArea/Views/Karkard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFyZWFcVmlld3NcS2Fya2FyZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/UserArea/Views/Shared/_Layout.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/UserArea/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFyZWFcVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/UserArea/Views/Timesheet/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/UserArea/Views/Timesheet/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFyZWFcVmlld3NcVGltZXNoZWV0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/UserArea/Views/User/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/UserArea/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFyZWFcVmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/UserArea/_ViewImports.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/UserArea/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFyZWFcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Areas/UserArea/_ViewStart.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Areas/UserArea/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFyZWFcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Account/AccessDenied.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Account/Login.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Home/Index.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Home/Privacy.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Shared/Error.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/_ViewImports.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/_ViewStart.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Timesheet/Timesheet/Views/Shared/_Layout.cshtml]
+[C:/Users/Asus/Desktop/DP/Timesheet/Timesheet/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-fx137rr8np
